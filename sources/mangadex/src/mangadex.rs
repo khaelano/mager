@@ -3,7 +3,7 @@ pub mod schema;
 pub mod error;
 pub mod query;
 
-use schema::{ChapterResponse, MangaResponse, PageResponse, CustomResult};
+use schema::{AuthorResponse, ChapterResponse, CustomResult, MangaResponse, PageResponse};
 use error::Error;
 use query::{chapter::ChapterQuery, manga::MangaQuery};
 
@@ -78,6 +78,22 @@ impl Mangadex {
             CustomResult::Err(e) => Result::Err(e.into())
         }
     }
+
+    /// Function for fetching an author's data from MangaDex API
+    pub async fn get_author(&self, id: &str) -> Result<AuthorResponse, Error>{
+        let url = format!("{}/author/{}", self.base_url, id);
+
+        let raw_response = self.client.get(url)
+            .send().await?
+            .bytes().await?;
+
+        let response: CustomResult<AuthorResponse> = serde_json::from_slice(&raw_response)?;
+
+        match response {
+            CustomResult::Ok(o) => Result::Ok(o),
+            CustomResult::Err(e) => Result::Err(e.into())
+        }
+    }
 }
 
 #[cfg(test)]
@@ -142,5 +158,28 @@ pub mod tests {
 
         let result = runtime.block_on(client.get_page_hash("1ec5c533-22fa-4422-873d-27549f48389d"));
         assert!(result.is_ok())
+    }
+
+    #[test]
+    fn get_author_valid() {
+        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+
+        let runtime = tokio::runtime::Runtime::new()
+            .unwrap();
+
+        let result = runtime.block_on(client.get_author("07a6a131-6567-4472-a08e-3ce84b5fc33a"));
+
+        assert!(result.is_ok())
+    }
+
+    #[test]
+    fn get_author_invalid() {
+        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+
+        let runtime = tokio::runtime::Runtime::new()
+            .unwrap();
+
+        let result = runtime.block_on(client.get_author("22fa-4422-873d-27549f48389d"));
+        assert!(result.is_err())
     }
 }

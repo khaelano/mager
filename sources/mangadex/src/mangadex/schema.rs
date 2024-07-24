@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use serde::Deserialize;
 
-use super::enums::*;
+use super::{enums::*, query::Uuid};
 
 type LocalizedString = HashMap<String, String>;
 #[derive(Deserialize, Debug)]
@@ -49,6 +49,13 @@ pub struct PageResponse {
     pub result: String,
     pub base_url: String,
     pub chapter: ChapterPages
+}
+
+#[derive(Deserialize, Debug)]
+pub struct AuthorResponse {
+    pub result: String,
+    pub response: String,
+    pub data: Author
 }
 
 #[derive(Deserialize, Debug)]
@@ -153,4 +160,39 @@ pub struct ChapterPages {
     pub hash: String,
     pub data: Vec<String>,
     pub data_saver: Vec<String>
+}
+
+#[derive(Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct Author {
+    pub id: Uuid,
+    #[serde(rename = "type")]
+    pub rel_type: RelationshipType,
+    pub attributes: AuthorAttr,
+    pub relationships: Option<Vec<Relationship>>
+}
+
+#[derive(Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct AuthorAttr {
+    pub name: String,
+    pub image_url: Option<String>,
+    pub biography: Option<LocalizedString>,
+    pub twitter: Option<String>,
+    pub pixiv: Option<String>,
+    pub melon_book: Option<String>,
+    pub fan_box: Option<String>,
+    pub booth: Option<String>,
+    pub nico_video: Option<String>,
+    pub skeb: Option<String>,
+    pub fantia: Option<String>,
+    pub tumblr: Option<String>,
+    pub youtube: Option<String>,
+    pub weibo: Option<String>,
+    pub naver: Option<String>,
+    pub namicomi: Option<String>,
+    pub website: Option<String>,
+    pub version: u32,
+    pub created_at: String,
+    pub updated_at: String
 }
