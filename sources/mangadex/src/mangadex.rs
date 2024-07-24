@@ -42,7 +42,7 @@ impl Mangadex {
 
         match response {
             CustomResult::Ok(o) => Result::Ok(o),
-            CustomResult::Err(e) => Result::Err(Error::Api(format!("{}", e)))
+            CustomResult::Err(e) => Result::Err(e.into())
         }
     }
 
@@ -59,7 +59,7 @@ impl Mangadex {
 
         match response {
             CustomResult::Ok(o) => Result::Ok(o),
-            CustomResult::Err(e) => Result::Err(Error::Api(format!("{}", e)))
+            CustomResult::Err(e) => Result::Err(e.into())
         }
     }
 
@@ -75,7 +75,7 @@ impl Mangadex {
 
         match response {
             CustomResult::Ok(o) => Result::Ok(o),
-            CustomResult::Err(e) => Result::Err(Error::Api(format!("{}", e)))
+            CustomResult::Err(e) => Result::Err(e.into())
         }
     }
 }
