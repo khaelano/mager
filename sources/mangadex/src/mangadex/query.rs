@@ -63,6 +63,15 @@ pub mod manga {
         }
     }
 
+    impl From<dto::Order> for SortingOrder {
+        fn from(value: dto::Order) -> Self {
+            match value {
+                dto::Order::Ascending => Self::ascending(),
+                dto::Order::Descending => Self::descending(),
+            }
+        }
+    }
+
     #[derive(Debug, Serialize)]
     #[serde(rename_all(serialize = "camelCase"))]
     pub struct MangaQuery {
@@ -100,6 +109,16 @@ pub mod manga {
                 ..Default::default()
             }
         }
+
+        pub fn set_offset(mut self, offset: u32) -> Self {
+            self.offset = offset;
+            self
+        }
+
+        pub fn set_order(mut self, order: SortingOrder) -> Self {
+            self.order = order;
+            self
+        }
     }
 
     impl Default for MangaQuery {
@@ -129,7 +148,8 @@ pub mod manga {
                     Demographic::Shounen,
                     Demographic::Shoujo,
                     Demographic::Josei,
-                    Demographic::Seinen
+                    Demographic::Seinen,
+                    Demographic::None
                 ],
                 ids: None,
                 content_rating: vec![
@@ -287,6 +307,7 @@ mod tests {
             &publicationDemographic[1]=shoujo\
             &publicationDemographic[2]=josei\
             &publicationDemographic[3]=seinen\
+            &publicationDemographic[4]=none\
             &contentRating[0]=safe\
             &contentRating[1]=suggestive\
             &contentRating[2]=erotica\

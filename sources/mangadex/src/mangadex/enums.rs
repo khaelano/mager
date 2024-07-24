@@ -6,7 +6,8 @@ pub enum Demographic {
     Shounen,
     Shoujo,
     Josei,
-    Seinen
+    Seinen,
+    None
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -15,7 +16,18 @@ pub enum PublicationStatus {
     Ongoing,
     Completed,
     Hiatus,
-    Cancelled
+    Cancelled,
+}
+
+impl PublicationStatus {
+    pub fn to_dto(self) -> dto::PublicationStatus {
+        match self {
+            PublicationStatus::Ongoing => dto::PublicationStatus::Ongoing,
+            PublicationStatus::Completed => dto::PublicationStatus::Completed,
+            PublicationStatus::Hiatus => dto::PublicationStatus::Hiatus,
+            PublicationStatus::Cancelled => dto::PublicationStatus::Cancelled,
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]

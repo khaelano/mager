@@ -110,7 +110,7 @@ pub mod tests {
             .unwrap();
 
         let result = runtime.block_on(client.search(&query));
-        assert!(result.is_ok())
+        println!("{:#?}", result.unwrap());
     }
 
     #[test]
