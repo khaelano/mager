@@ -28,7 +28,7 @@ fn search(keyword: &str, page: u32, filter: &Filter, user_agent: &str) -> Result
         .build()
         .unwrap();
 
-    let response = runtime.block_on(client.search(query))?;
+    let response = runtime.block_on(client.old_search(query))?;
 
     let mut mangas : Vec<Manga> = Vec::new();
     for m in response.data {
@@ -39,7 +39,7 @@ fn search(keyword: &str, page: u32, filter: &Filter, user_agent: &str) -> Result
             .iter()
             .filter(|r| matches!(r.rel_type, RelationshipType::Artist | RelationshipType::Author))
             .filter_map(|r| {
-                let author_data = runtime.block_on(client.get_author(&r.id)).unwrap().data;
+                let author_data = runtime.block_on(client.old_get_author(&r.id)).unwrap().data;
 
                 let author_name = author_data.attributes.name;
 

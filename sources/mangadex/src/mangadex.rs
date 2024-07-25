@@ -7,92 +7,72 @@ use schema::{AuthorResponse, ChapterResponse, CustomResult, MangaResponse, PageR
 use error::Error;
 use query::{chapter::ChapterQuery, manga::MangaQuery};
 
-use reqwest::{Client, ClientBuilder};
+use serde::de::DeserializeOwned;
+use ureq::{self, Agent, AgentBuilder};
 
 pub struct Mangadex {
     base_url: String,
-    client: Client,
+    agent: Agent
 }
 
 impl Mangadex {
     pub fn new(user_agent: &str) -> Mangadex {
-        let client = ClientBuilder::new()
+        let agent = AgentBuilder::new()
             .user_agent(user_agent)
-            .build()
-            .unwrap();
+            .build();
 
         let base_url = String::from("https://api.mangadex.org");
 
         Mangadex {
             base_url,
-            client
+            agent
+        }
+    }
+
+
+    /// Function for sending a GET method to MangaDex API, then deserialize it to T
+    fn get<T>(&self, url: &str) -> Result<T, Error>
+    where
+        T: DeserializeOwned
+    {
+        let response: CustomResult<T> = self.agent.get(url)
+            .call()?
+            .into_json()?;
+
+        match response {
+            CustomResult::Ok(i) => Ok(i),
+            CustomResult::Err(e) => Result::Err(e.into())
         }
     }
 
     /// Function for searching manga from MangaDex API
-    pub async fn search(&self, query: &MangaQuery) -> Result<MangaResponse, Error> {
+    pub fn search(&self, query: &MangaQuery) -> Result<MangaResponse, Error> {
         let query_string = serde_qs::to_string(query).unwrap();
         let url = format!("{}/manga?{}", self.base_url, query_string);
 
-        let raw_response = self.client.get(url)
-            .send().await?
-            .bytes().await?;
-
-        let response: CustomResult<MangaResponse> = serde_json::from_slice(&raw_response)?;
-
-        match response {
-            CustomResult::Ok(o) => Result::Ok(o),
-            CustomResult::Err(e) => Result::Err(e.into())
-        }
+        self.get::<MangaResponse>(&url)
     }
 
     /// Function for fetching a manga's chapter list from MangaDex API
-    pub async fn get_chapters(&self, id: &str, query: &ChapterQuery) -> Result<ChapterResponse, Error> {
+    pub fn chapters(&self, id: &str, query: &ChapterQuery) -> Result<ChapterResponse, Error> {
         let query_string = serde_qs::to_string(query).unwrap();
         let url = format!("{}/manga/{}/feed?{}", self.base_url, id, query_string);
 
-        let raw_response = self.client.get(url)
-            .send().await?
-            .bytes().await?;
-
-        let response: CustomResult<ChapterResponse> = serde_json::from_slice(&raw_response)?;
-
-        match response {
-            CustomResult::Ok(o) => Result::Ok(o),
-            CustomResult::Err(e) => Result::Err(e.into())
-        }
+        self.get::<ChapterResponse>(&url)
     }
 
     /// Function for fetching a chapter's page hash from MangaDex API
-    pub async fn get_page_hash(&self, id: &str) -> Result<PageResponse, Error> {
+    pub fn page_hash(&self, id: &str) -> Result<PageResponse, Error> {
         let url = format!("{}/at-home/server/{}", self.base_url, id);
 
-        let raw_response = self.client.get(url)
-            .send().await?
-            .bytes().await?;
-
-        let response: CustomResult<PageResponse> = serde_json::from_slice(&raw_response)?;
-
-        match response {
-            CustomResult::Ok(o) => Result::Ok(o),
-            CustomResult::Err(e) => Result::Err(e.into())
-        }
+        self.get::<PageResponse>(&url)
     }
 
-    /// Function for fetching an author's data from MangaDex API
-    pub async fn get_author(&self, id: &str) -> Result<AuthorResponse, Error>{
+    /// Function for fetching a chapter's page hash from MangaDex API
+    pub fn author(&self, id: &str) -> Result<AuthorResponse, Error> {
         let url = format!("{}/author/{}", self.base_url, id);
 
-        let raw_response = self.client.get(url)
-            .send().await?
-            .bytes().await?;
-
-        let response: CustomResult<AuthorResponse> = serde_json::from_slice(&raw_response)?;
-
-        match response {
-            CustomResult::Ok(o) => Result::Ok(o),
-            CustomResult::Err(e) => Result::Err(e.into())
-        }
+        self.get::<AuthorResponse>(&url)
     }
 }
 
@@ -106,10 +86,7 @@ pub mod tests {
         let query = manga::MangaQuery::new("5Toubun no hanayome");
         let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
-        let runtime = tokio::runtime::Runtime::new()
-            .unwrap();
-
-        let result = runtime.block_on(client.search(&query));
+        let result = client.search(&query);
         println!("{:#?}", result.unwrap());
     }
 
@@ -118,10 +95,7 @@ pub mod tests {
         let query = manga::MangaQuery::new("aifjaodfaodjf");
         let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
-        let runtime = tokio::runtime::Runtime::new()
-            .unwrap();
-
-        let result = runtime.block_on(client.search(&query));
+        let result = client.search(&query);
         assert!(result.is_ok())
     }
 
@@ -130,10 +104,7 @@ pub mod tests {
         let query = chapter::ChapterQuery::default();
         let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
-        let runtime = tokio::runtime::Runtime::new()
-            .unwrap();
-
-        let result = runtime.block_on(client.get_chapters("a2febd3e-6252-46eb-bd63-01d51deaaec5", &query));
+        let result = client.chapters("a2febd3e-6252-46eb-bd63-01d51deaaec5", &query);
         assert!(result.is_ok())
     }
 
@@ -142,10 +113,7 @@ pub mod tests {
         let query = chapter::ChapterQuery::default();
         let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
-        let runtime = tokio::runtime::Runtime::new()
-            .unwrap();
-
-        let result = runtime.block_on(client.get_chapters("lma0-6252-46eb-bd63-01d51deaaec5", &query));
+        let result = client.chapters("6252-46eb-bd63-01d51deaaec5", &query);
         assert!(result.is_err())
     }
 
@@ -153,10 +121,7 @@ pub mod tests {
     fn get_page_hash() {
         let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
-        let runtime = tokio::runtime::Runtime::new()
-            .unwrap();
-
-        let result = runtime.block_on(client.get_page_hash("1ec5c533-22fa-4422-873d-27549f48389d"));
+        let result = client.page_hash("1ec5c533-22fa-4422-873d-27549f48389d");
         assert!(result.is_ok())
     }
 
@@ -164,11 +129,7 @@ pub mod tests {
     fn get_author_valid() {
         let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
-        let runtime = tokio::runtime::Runtime::new()
-            .unwrap();
-
-        let result = runtime.block_on(client.get_author("07a6a131-6567-4472-a08e-3ce84b5fc33a"));
-
+        let result = client.author("07a6a131-6567-4472-a08e-3ce84b5fc33a");
         assert!(result.is_ok())
     }
 
@@ -176,10 +137,7 @@ pub mod tests {
     fn get_author_invalid() {
         let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
-        let runtime = tokio::runtime::Runtime::new()
-            .unwrap();
-
-        let result = runtime.block_on(client.get_author("22fa-4422-873d-27549f48389d"));
+        let result = client.author("22fa-4422-873d-27549f48389d");
         assert!(result.is_err())
     }
 }
