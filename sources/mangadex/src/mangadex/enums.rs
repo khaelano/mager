@@ -7,7 +7,7 @@ pub enum Demographic {
     Shoujo,
     Josei,
     Seinen,
-    None
+    None,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -36,10 +36,10 @@ pub enum ContentRating {
     Safe,
     Suggestive,
     Erotica,
-    Pornographic
+    Pornographic,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "snake_case")]
 pub enum RelationshipType {
     Manga,
@@ -51,7 +51,7 @@ pub enum RelationshipType {
     Tag,
     User,
     CustomList,
-    Creator
+    Creator,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -60,10 +60,10 @@ pub enum State {
     Draft,
     Submitted,
     Published,
-    Rejected
+    Rejected,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "snake_case")]
 pub enum MangaRelationshipType {
     Monochrome,
@@ -81,7 +81,7 @@ pub enum MangaRelationshipType {
     AlternateVersion,
     Preserialization,
     Colored,
-    Serialization
+    Serialization,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -90,5 +90,5 @@ pub enum TagGroup {
     Content,
     Format,
     Genre,
-    Theme
+    Theme,
 }

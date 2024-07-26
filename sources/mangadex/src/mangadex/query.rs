@@ -9,14 +9,14 @@ pub enum Order {
     #[serde(rename(serialize = "asc"))]
     Ascending,
     #[serde(rename(serialize = "desc"))]
-    Descending
+    Descending,
 }
 
 #[derive(Debug, Serialize)]
 #[serde(rename_all(serialize = "UPPERCASE"))]
 pub enum LogicMode {
     And,
-    Or
+    Or,
 }
 
 pub mod manga {
@@ -119,12 +119,17 @@ pub mod manga {
             self.order = order;
             self
         }
+
+        pub fn set_limit(mut self, limit: u32) -> Self {
+            self.limit = limit;
+            self
+        }
     }
 
     impl Default for MangaQuery {
         fn default() -> Self {
             MangaQuery {
-                limit: 10,
+                limit: 20,
                 offset: 0,
                 title: None,
                 author_or_artist: None,
@@ -139,23 +144,23 @@ pub mod manga {
                     PublicationStatus::Ongoing,
                     PublicationStatus::Completed,
                     PublicationStatus::Hiatus,
-                    PublicationStatus::Cancelled
+                    PublicationStatus::Cancelled,
                 ],
                 original_language: None,
                 excluded_original_language: None,
-                available_translated_language: None,
+                available_translated_language: Some(vec![String::from("en")]),
                 publication_demographic: vec![
                     Demographic::Shounen,
                     Demographic::Shoujo,
                     Demographic::Josei,
                     Demographic::Seinen,
-                    Demographic::None
+                    Demographic::None,
                 ],
                 ids: None,
                 content_rating: vec![
                     ContentRating::Safe,
                     ContentRating::Suggestive,
-                    ContentRating::Erotica
+                    ContentRating::Erotica,
                 ],
                 created_at_since: None,
                 updated_at_since: None,
@@ -179,7 +184,7 @@ pub mod chapter {
         publish_at: Order,
         readable_at: Order,
         volume: Order,
-        chapter: Order
+        chapter: Order,
     }
 
     impl SortingOrder {
@@ -194,7 +199,7 @@ pub mod chapter {
             }
         }
 
-        pub fn descending() -> Self{
+        pub fn descending() -> Self {
             SortingOrder {
                 created_at: Order::Descending,
                 updated_at: Order::Descending,
@@ -206,11 +211,20 @@ pub mod chapter {
         }
     }
 
+    impl From<dto::Order> for SortingOrder {
+        fn from(value: dto::Order) -> Self {
+            match value {
+                dto::Order::Ascending => Self::ascending(),
+                dto::Order::Descending => Self::descending(),
+            }
+        }
+    }
+
     #[derive(Debug, Serialize)]
     #[serde(rename_all(serialize = "camelCase"))]
     pub struct ChapterQuery {
         pub limit: u32,
-        pub offset: u32 ,
+        pub offset: u32,
         pub translated_language: Option<Vec<String>>,
         pub original_language: Option<Vec<String>>,
         pub exclude_original_language: Option<Vec<String>>,
@@ -229,7 +243,7 @@ pub mod chapter {
         #[serde(serialize_with = "serialize_bool")]
         pub include_future_publish_at: bool,
         #[serde(serialize_with = "serialize_bool")]
-        pub include_external_url: bool
+        pub include_external_url: bool,
     }
 
     impl ChapterQuery {
@@ -239,6 +253,21 @@ pub mod chapter {
                 offset,
                 ..Default::default()
             }
+        }
+
+        pub fn set_limit(mut self, limit: u32) -> Self {
+            self.limit = limit;
+            self
+        }
+
+        pub fn set_offset(mut self, offset: u32) -> Self {
+            self.offset = offset;
+            self
+        }
+
+        pub fn set_order(mut self, order: SortingOrder) -> Self {
+            self.order = order;
+            self
         }
     }
 
@@ -261,12 +290,11 @@ pub mod chapter {
                 includes: Some(vec![
                     RelationshipType::Manga,
                     RelationshipType::ScanlationGroup,
-                    RelationshipType::User
+                    RelationshipType::User,
                 ]),
                 include_empty_pages: false,
                 include_future_publish_at: false,
                 include_external_url: false,
-
             }
         }
     }
@@ -274,7 +302,7 @@ pub mod chapter {
 
 fn serialize_bool<S>(v: &bool, serializer: S) -> Result<S::Ok, S::Error>
 where
-    S: Serializer
+    S: Serializer,
 {
     if *v {
         serializer.serialize_u8(1)
@@ -285,8 +313,8 @@ where
 
 #[cfg(test)]
 mod tests {
-    use super::manga::MangaQuery;
     use super::chapter::ChapterQuery;
+    use super::manga::MangaQuery;
 
     #[test]
     fn manga_query() {
@@ -319,7 +347,7 @@ mod tests {
             &order[followedCount]=desc\
             &order[relevance]=desc\
             &order[rating]=desc\
-            &hasAvailableChapters=1"
+            &hasAvailableChapters=1",
         );
 
         assert_eq!(result, correct_result)
@@ -346,7 +374,7 @@ mod tests {
             &includes[2]=user\
             &includeEmptyPages=0\
             &includeFuturePublishAt=0\
-            &includeExternalUrl=0"
+            &includeExternalUrl=0",
         );
 
         assert_eq!(result, correct_result)

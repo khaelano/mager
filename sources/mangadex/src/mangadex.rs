@@ -1,47 +1,39 @@
 pub mod enums;
-pub mod schema;
 pub mod error;
 pub mod query;
+pub mod schema;
 
-use schema::{AuthorResponse, ChapterResponse, CustomResult, MangaResponse, PageResponse};
 use error::Error;
 use query::{chapter::ChapterQuery, manga::MangaQuery};
+use schema::{AuthorResponse, ChapterResponse, CustomResult, MangaResponse, PageResponse};
 
 use serde::de::DeserializeOwned;
 use ureq::{self, Agent, AgentBuilder};
 
 pub struct Mangadex {
     base_url: String,
-    agent: Agent
+    agent: Agent,
 }
 
 impl Mangadex {
     pub fn new(user_agent: &str) -> Mangadex {
-        let agent = AgentBuilder::new()
-            .user_agent(user_agent)
-            .build();
+        let agent = AgentBuilder::new().user_agent(user_agent).build();
 
         let base_url = String::from("https://api.mangadex.org");
 
-        Mangadex {
-            base_url,
-            agent
-        }
+        Mangadex { base_url, agent }
     }
-
 
     /// Function for sending a GET method to MangaDex API, then deserialize it to T
     fn get<T>(&self, url: &str) -> Result<T, Error>
     where
-        T: DeserializeOwned
+        T: DeserializeOwned,
     {
-        let response: CustomResult<T> = self.agent.get(url)
-            .call()?
-            .into_json()?;
+        let response: CustomResult<T> = self.agent.get(url).call()?.into_json()?;
 
         match response {
             CustomResult::Ok(i) => Ok(i),
-            CustomResult::Err(e) => Result::Err(e.into())
+            CustomResult::Err(e) => Result::Err(e.into()),
         }
     }
 
@@ -78,13 +70,14 @@ impl Mangadex {
 
 #[cfg(test)]
 pub mod tests {
-    use super::query::{manga, chapter};
+    use super::query::{chapter, manga};
     use super::*;
 
     #[test]
     fn manga_search_valid() {
         let query = manga::MangaQuery::new("5Toubun no hanayome");
-        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+        let client =
+            Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
         let result = client.search(&query);
         println!("{:#?}", result.unwrap());
@@ -93,7 +86,8 @@ pub mod tests {
     #[test]
     fn manga_search_invalid() {
         let query = manga::MangaQuery::new("aifjaodfaodjf");
-        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+        let client =
+            Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
         let result = client.search(&query);
         assert!(result.is_ok())
@@ -102,7 +96,8 @@ pub mod tests {
     #[test]
     fn get_chapters_valid() {
         let query = chapter::ChapterQuery::default();
-        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+        let client =
+            Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
         let result = client.chapters("a2febd3e-6252-46eb-bd63-01d51deaaec5", &query);
         assert!(result.is_ok())
@@ -111,7 +106,8 @@ pub mod tests {
     #[test]
     fn get_chapter_invalid() {
         let query = chapter::ChapterQuery::default();
-        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+        let client =
+            Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
         let result = client.chapters("6252-46eb-bd63-01d51deaaec5", &query);
         assert!(result.is_err())
@@ -119,7 +115,8 @@ pub mod tests {
 
     #[test]
     fn get_page_hash() {
-        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+        let client =
+            Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
         let result = client.page_hash("1ec5c533-22fa-4422-873d-27549f48389d");
         assert!(result.is_ok())
@@ -127,7 +124,8 @@ pub mod tests {
 
     #[test]
     fn get_author_valid() {
-        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+        let client =
+            Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
         let result = client.author("07a6a131-6567-4472-a08e-3ce84b5fc33a");
         assert!(result.is_ok())
@@ -135,7 +133,8 @@ pub mod tests {
 
     #[test]
     fn get_author_invalid() {
-        let client = Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
+        let client =
+            Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
         let result = client.author("22fa-4422-873d-27549f48389d");
         assert!(result.is_err())

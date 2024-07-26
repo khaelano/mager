@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use serde::Deserialize;
+use std::collections::HashMap;
 
 use super::{enums::*, query::Uuid};
 
@@ -8,13 +8,13 @@ type LocalizedString = HashMap<String, String>;
 #[serde(untagged)]
 pub enum CustomResult<T> {
     Ok(T),
-    Err(ErrorResponse)
+    Err(ErrorResponse),
 }
 
 #[derive(Deserialize, Debug)]
 pub struct ErrorResponse {
     pub result: String,
-    pub errors: Vec<MDError>
+    pub errors: Vec<MDError>,
 }
 
 impl std::fmt::Display for ErrorResponse {
@@ -30,7 +30,7 @@ pub struct MangaResponse {
     pub data: Vec<Manga>,
     pub limit: u32,
     pub offset: u32,
-    pub total: u32
+    pub total: u32,
 }
 
 #[derive(Deserialize, Debug)]
@@ -40,7 +40,7 @@ pub struct ChapterResponse {
     pub data: Vec<Chapter>,
     pub limit: u32,
     pub offset: u32,
-    pub total: u32
+    pub total: u32,
 }
 
 #[derive(Deserialize, Debug)]
@@ -48,14 +48,14 @@ pub struct ChapterResponse {
 pub struct PageResponse {
     pub result: String,
     pub base_url: String,
-    pub chapter: ChapterPages
+    pub chapter: ChapterPages,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct AuthorResponse {
     pub result: String,
     pub response: String,
-    pub data: Author
+    pub data: Author,
 }
 
 #[derive(Deserialize, Debug)]
@@ -64,10 +64,10 @@ pub struct MDError {
     pub status: u32,
     pub title: String,
     pub detail: Option<String>,
-    pub context: Option<String>
+    pub context: Option<String>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Relationship {
     pub id: String,
@@ -83,7 +83,7 @@ pub struct Manga {
     #[serde(rename = "type")]
     pub entity_type: String,
     pub attributes: MangaAttr,
-    pub relationships: Option<Vec<Relationship>>
+    pub relationships: Option<Vec<Relationship>>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -117,7 +117,7 @@ pub struct Tag {
     #[serde(rename = "type")]
     pub rel_type: RelationshipType,
     pub attributes: TagAttr,
-    pub relationships: Option<Vec<Relationship>>
+    pub relationships: Option<Vec<Relationship>>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -135,7 +135,7 @@ pub struct Chapter {
     #[serde(rename = "type")]
     pub rel_type: String,
     pub attributes: ChapterAttr,
-    pub relationships: Option<Vec<Relationship>>
+    pub relationships: Option<Vec<Relationship>>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -159,7 +159,7 @@ pub struct ChapterAttr {
 pub struct ChapterPages {
     pub hash: String,
     pub data: Vec<String>,
-    pub data_saver: Vec<String>
+    pub data_saver: Vec<String>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -169,7 +169,7 @@ pub struct Author {
     #[serde(rename = "type")]
     pub rel_type: RelationshipType,
     pub attributes: AuthorAttr,
-    pub relationships: Option<Vec<Relationship>>
+    pub relationships: Option<Vec<Relationship>>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -194,5 +194,5 @@ pub struct AuthorAttr {
     pub website: Option<String>,
     pub version: u32,
     pub created_at: String,
-    pub updated_at: String
+    pub updated_at: String,
 }

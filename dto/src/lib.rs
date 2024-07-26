@@ -1,9 +1,9 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Carrier<T> {
     pub source: String,
-    pub data: T
+    pub data: T,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -15,7 +15,7 @@ pub struct Filter {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum Order {
     Ascending,
-    Descending
+    Descending,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -24,20 +24,20 @@ pub enum PublicationStatus {
     Completed,
     Hiatus,
     Cancelled,
-    Unknown
+    Unknown,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Author {
     pub name: String,
-    pub details: String
+    pub details: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MangaList {
     pub page: u32,
     pub total_page: u32,
-    pub data: Vec<Manga>
+    pub data: Vec<Manga>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -56,7 +56,7 @@ pub struct Chapter {
     pub url: String,
     pub title: String,
     pub number: String,
-    pub original_language: String,
     pub language: String,
-    pub pages_url: Vec<String>
 }
+
+pub type ChapterPages = Vec<String>;
