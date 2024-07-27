@@ -1,6 +1,7 @@
 use std::sync::Arc;
+use std::net::TcpListener;
 
-use dto::{Author, Carrier, Chapter, Filter, Manga, MangaList};
+use dto::{Author, Chapter, Filter, Manga, MangaList};
 use mangadex::enums::RelationshipType;
 use mangadex::error::Error;
 use mangadex::query::{chapter::ChapterQuery, manga::MangaQuery};
@@ -10,26 +11,22 @@ use mangadex::Mangadex;
 mod mangadex;
 
 pub fn main() {
-    let chapter = chapters(
-        "a2febd3e-6252-46eb-bd63-01d51deaaec5",
-        1,
-        Filter {
-            language: "en".to_string(),
-            sort: dto::Order::Descending,
-        },
-        "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0",
-    )
-    .unwrap();
+    let listener = TcpListener::bind("127.0.0.1:3232").unwrap();
+    for stream in listener.incoming() {
+        let stream = stream.unwrap();
+        let port = stream.local_addr().unwrap().port();
 
-    println!("{:#?}", chapter);
+
+    }
 }
+
 
 fn chapters(
     id: &str,
     page: u32,
     filter: Filter,
     user_agent: &str,
-) -> Result<Carrier<Vec<Chapter>>, Error> {
+) -> Result<Vec<Chapter>, Error> {
     let client = Arc::new(Mangadex::new(user_agent));
     let limit = 50;
     let offset = (page - 1) * 50;
@@ -39,16 +36,13 @@ fn chapters(
 
     let mut chapters = Vec::new();
     for ch in response.data {
-        chapters.push(convert_chapter(client.clone(), ch).unwrap());
+        chapters.push(convert_chapter(ch).unwrap());
     }
 
-    Ok(Carrier {
-        source: String::from("MangaDex"),
-        data: chapters,
-    })
+    Ok(chapters)
 }
 
-fn convert_chapter(client: Arc<Mangadex>, md_chapter: MDChapter) -> Result<Chapter, Error> {
+fn convert_chapter(md_chapter: MDChapter) -> Result<Chapter, Error> {
     let url = format!("https://api.mangadex.org/at-home/server/{}", md_chapter.id);
     let title = md_chapter
         .attributes
@@ -89,7 +83,7 @@ fn search(
     page: u32,
     filter: Filter,
     user_agent: &str,
-) -> Result<Carrier<MangaList>, Error> {
+) -> Result<MangaList, Error> {
     let client = Arc::new(Mangadex::new(user_agent));
     let limit = 10;
     let query = &MangaQuery::new(keyword)
@@ -117,13 +111,10 @@ fn search(
         );
     }
 
-    Ok(Carrier {
-        source: String::from("MangaDex"),
-        data: MangaList {
-            data,
-            page,
-            total_page: response.total / limit,
-        },
+    Ok(MangaList {
+        data,
+        page,
+        total_page: response.total / limit,
     })
 }
 
