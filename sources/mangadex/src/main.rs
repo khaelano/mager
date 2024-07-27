@@ -1,7 +1,12 @@
-use std::sync::Arc;
+use std::io::{Read, Write};
 use std::net::TcpListener;
+use std::sync::Arc;
 
+use serde_json;
+
+use dto::carriers::{self, Request, Response, Status};
 use dto::{Author, Chapter, Filter, Manga, MangaList};
+
 use mangadex::enums::RelationshipType;
 use mangadex::error::Error;
 use mangadex::query::{chapter::ChapterQuery, manga::MangaQuery};
@@ -11,22 +16,56 @@ use mangadex::Mangadex;
 mod mangadex;
 
 pub fn main() {
+    let user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0";
+    let client_name = String::from("MangaDex");
     let listener = TcpListener::bind("127.0.0.1:3232").unwrap();
     for stream in listener.incoming() {
-        let stream = stream.unwrap();
-        let port = stream.local_addr().unwrap().port();
+        let mut stream = stream.unwrap();
+        let port = stream.local_addr().unwrap();
 
+        let mut bytes: Vec<u8> = Vec::new();
+        let _  = stream.read_to_end(&mut bytes).unwrap();
 
+        let request: Request = serde_json::from_slice(&bytes).unwrap();
+
+        let response = match request.command {
+            carriers::Command::Search { keyword, page, filter } => {
+                let mangas = search(&keyword, page, filter, user_agent).unwrap();
+                let content = Response {
+                    status: Status::Ok,
+                    reason: String::from("Feeling good today aren't we?"),
+                    source_name: client_name.clone(),
+                    content: mangas
+                };
+                serde_json::to_string(&content).unwrap()
+            },
+            carriers::Command::Chapters { identifier, page, filter } => {
+                let chapters = chapters(&identifier, page, filter, user_agent).unwrap();
+                let content = Response {
+                    status: Status::Ok,
+                    reason: String::from("Feeling good today aren't we?"),
+                    source_name: client_name.clone(),
+                    content: chapters
+                };
+                serde_json::to_string(&content).unwrap()
+            },
+            carriers::Command::Pages { identifier } => {
+                let pages = get_chapter_pages(&identifier, user_agent).unwrap();
+                let content = Response {
+                    status: Status::Ok,
+                    reason: String::from("Feeling good today aren't we?"),
+                    source_name: client_name.clone(),
+                    content: pages
+                };
+                serde_json::to_string(&content).unwrap()
+            },
+        };
+
+        let _ = stream.write_all(response.as_bytes()).unwrap();
     }
 }
 
-
-fn chapters(
-    id: &str,
-    page: u32,
-    filter: Filter,
-    user_agent: &str,
-) -> Result<Vec<Chapter>, Error> {
+fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<Vec<Chapter>, Error> {
     let client = Arc::new(Mangadex::new(user_agent));
     let limit = 50;
     let offset = (page - 1) * 50;
@@ -57,14 +96,15 @@ fn convert_chapter(md_chapter: MDChapter) -> Result<Chapter, Error> {
     let language = String::from("en");
 
     Ok(Chapter {
-        url,
+        identifier: url,
         title,
         number,
         language,
     })
 }
 
-fn get_chapter_pages(client: Arc<Mangadex>, id: &str) -> Result<Vec<String>, Error> {
+fn get_chapter_pages(id: &str, user_agent: &str) -> Result<Vec<String>, Error> {
+    let client = Arc::new(Mangadex::new(user_agent));
     let result = client.page_hash(id).unwrap();
 
     let mut urls = Vec::new();
@@ -78,12 +118,7 @@ fn get_chapter_pages(client: Arc<Mangadex>, id: &str) -> Result<Vec<String>, Err
     Ok(urls)
 }
 
-fn search(
-    keyword: &str,
-    page: u32,
-    filter: Filter,
-    user_agent: &str,
-) -> Result<MangaList, Error> {
+fn search(keyword: &str, page: u32, filter: Filter, user_agent: &str) -> Result<MangaList, Error> {
     let client = Arc::new(Mangadex::new(user_agent));
     let limit = 10;
     let query = &MangaQuery::new(keyword)
@@ -183,7 +218,7 @@ async fn convert_manga(client: Arc<Mangadex>, md_manga: MDManga) -> Result<Manga
     let status = md_manga.attributes.status.to_dto();
 
     Ok(Manga {
-        url,
+        identifier: url,
         title,
         authors,
         original_language,
