@@ -1,5 +1,6 @@
+use std::env;
 use std::io::{Read, Write};
-use std::net::TcpListener;
+use std::net::{TcpListener, TcpStream};
 use std::sync::Arc;
 
 use serde_json;
@@ -16,53 +17,87 @@ use mangadex::Mangadex;
 mod mangadex;
 
 pub fn main() {
-    let user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0";
-    let client_name = String::from("MangaDex");
-    let listener = TcpListener::bind("127.0.0.1:3232").unwrap();
+    let args: Vec<String> = env::args().collect();
+    let port = args.get(1).unwrap();
+
+    let listener = TcpListener::bind(format!("127.0.0.1:{port}")).unwrap();
+
     for stream in listener.incoming() {
         let mut stream = stream.unwrap();
-        let port = stream.local_addr().unwrap();
 
-        let mut bytes: Vec<u8> = Vec::new();
-        let _  = stream.read_to_end(&mut bytes).unwrap();
+        let mut length = [0; 4];
+        let _read = stream.read_exact(&mut length).unwrap();
+        let length = u32::from_ne_bytes(length) as usize;
 
-        let request: Request = serde_json::from_slice(&bytes).unwrap();
+        let mut request = vec![0; length];
+        let _read = stream.read_exact(&mut request).unwrap();
 
-        let response = match request.command {
-            carriers::Command::Search { keyword, page, filter } => {
-                let mangas = search(&keyword, page, filter, user_agent).unwrap();
-                let content = Response {
-                    status: Status::Ok,
-                    reason: String::from("Feeling good today aren't we?"),
-                    source_name: client_name.clone(),
-                    content: mangas
-                };
-                serde_json::to_string(&content).unwrap()
-            },
-            carriers::Command::Chapters { identifier, page, filter } => {
-                let chapters = chapters(&identifier, page, filter, user_agent).unwrap();
-                let content = Response {
-                    status: Status::Ok,
-                    reason: String::from("Feeling good today aren't we?"),
-                    source_name: client_name.clone(),
-                    content: chapters
-                };
-                serde_json::to_string(&content).unwrap()
-            },
-            carriers::Command::Pages { identifier } => {
-                let pages = get_chapter_pages(&identifier, user_agent).unwrap();
-                let content = Response {
-                    status: Status::Ok,
-                    reason: String::from("Feeling good today aren't we?"),
-                    source_name: client_name.clone(),
-                    content: pages
-                };
-                serde_json::to_string(&content).unwrap()
-            },
-        };
-
-        let _ = stream.write_all(response.as_bytes()).unwrap();
+        let request: Request = serde_json::from_slice(&request).unwrap();
+        let _ = handle_request(request, stream);
     }
+}
+
+fn handle_request(request: Request, mut stream: TcpStream) {
+    let client_name = String::from("MangaDex");
+    let user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0";
+    let response = match request.command {
+        carriers::Command::Search {
+            keyword,
+            page,
+            filter,
+        } => {
+            let mangas = search(&keyword, page, filter, user_agent).unwrap();
+            let content = Response {
+                status: Status::Ok,
+                reason: String::from("Feeling good today aren't we?"),
+                source_name: client_name.clone(),
+                content: mangas,
+            };
+            serde_json::to_string(&content).unwrap()
+        }
+        carriers::Command::Chapters {
+            identifier,
+            page,
+            filter,
+        } => {
+            let chapters = chapters(&identifier, page, filter, user_agent).unwrap();
+            let content = Response {
+                status: Status::Ok,
+                reason: String::from("Feeling good today aren't we?"),
+                source_name: client_name.clone(),
+                content: chapters,
+            };
+            serde_json::to_string(&content).unwrap()
+        }
+        carriers::Command::Pages { identifier } => {
+            let pages = get_chapter_pages(&identifier, user_agent).unwrap();
+            let content = Response {
+                status: Status::Ok,
+                reason: String::from("Feeling good today aren't we?"),
+                source_name: client_name.clone(),
+                content: pages,
+            };
+            serde_json::to_string(&content).unwrap()
+        }
+        carriers::Command::Ping => {
+            let content = Response {
+                status: Status::Ok,
+                reason: String::from("Pong, this source is active"),
+                source_name: client_name.clone(),
+                content: (),
+            };
+            serde_json::to_string(&content).unwrap()
+        }
+    };
+
+    let _ = write_to_stream(&mut stream, &response);
+}
+
+fn write_to_stream(stream: &mut TcpStream, payload: &str) {
+    let size = payload.len() as u32;
+    let _ = stream.write_all(&size.to_ne_bytes());
+    let _ = stream.write_all(payload.as_bytes());
+    let _ = stream.flush();
 }
 
 fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<Vec<Chapter>, Error> {
