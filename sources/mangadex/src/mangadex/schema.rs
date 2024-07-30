@@ -5,10 +5,10 @@ use super::{enums::*, query::Uuid};
 
 type LocalizedString = HashMap<String, String>;
 #[derive(Deserialize, Debug)]
-#[serde(untagged)]
+#[serde(tag = "result", rename_all = "camelCase")]
 pub enum CustomResult<T> {
     Ok(T),
-    Err(ErrorResponse),
+    Error(ErrorResponse),
 }
 
 #[derive(Deserialize, Debug)]
@@ -24,8 +24,8 @@ impl std::fmt::Display for ErrorResponse {
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MangaResponse {
-    pub result: String,
+pub struct MangaList {
+    // pub result: String,
     pub response: String,
     pub data: Vec<Manga>,
     pub limit: u32,
@@ -34,8 +34,7 @@ pub struct MangaResponse {
 }
 
 #[derive(Deserialize, Debug)]
-pub struct ChapterResponse {
-    pub result: String,
+pub struct MangaFeed {
     pub response: String,
     pub data: Vec<Chapter>,
     pub limit: u32,
@@ -45,15 +44,13 @@ pub struct ChapterResponse {
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct PageResponse {
-    pub result: String,
+pub struct PageHash {
     pub base_url: String,
     pub chapter: ChapterPages,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct AuthorResponse {
-    pub result: String,
+pub struct AuthorInfo {
     pub response: String,
     pub data: Author,
 }
@@ -80,8 +77,8 @@ pub struct Relationship {
 #[serde(rename_all = "camelCase")]
 pub struct Manga {
     pub id: String,
-    #[serde(rename = "type")]
-    pub entity_type: String,
+    // #[serde(rename = "type")]
+    // pub entity_type: String,
     pub attributes: MangaAttr,
     pub relationships: Option<Vec<Relationship>>,
 }
@@ -90,24 +87,25 @@ pub struct Manga {
 #[serde(rename_all = "camelCase")]
 pub struct MangaAttr {
     pub title: LocalizedString,
-    pub alt_titles: Option<Vec<LocalizedString>>,
+    // pub alt_titles: Option<Vec<LocalizedString>>,
     pub description: Option<LocalizedString>,
-    pub is_locked: bool,
-    pub links: Option<HashMap<String, String>>,
+    // pub is_locked: bool,
+    // pub links: Option<HashMap<String, String>>,
     pub original_language: String,
-    pub last_volume: Option<String>,
-    pub last_chapter: Option<String>,
+    // pub last_volume: Option<String>,
+    // pub last_chapter: Option<String>,
     pub publication_demographic: Option<Demographic>,
     pub status: PublicationStatus,
     pub year: Option<u32>,
     pub content_rating: ContentRating,
     pub state: State,
-    pub chapter_numbers_reset_on_new_volume: bool,
-    pub created_at: String,
-    pub updated_at: String,
-    pub version: u32,
-    pub available_translated_languages: Option<Vec<String>>,
-    pub latest_uploaded_chapter: Option<String>,
+    // pub chapter_numbers_reset_on_new_volume: bool,
+    // pub created_at: String,
+    // pub updated_at: String,
+    // pub version: u32,
+    // #[serde(default)]
+    // pub available_translated_languages: Option<Vec<String>>,
+    // pub latest_uploaded_chapter: Option<String>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -146,8 +144,8 @@ pub struct ChapterAttr {
     pub chapter: Option<String>,
     pub pages: u32,
     pub translated_language: String,
-    pub external_url: Option<String>,
-    pub version: u32,
+    // pub external_url: Option<String>,
+    // pub version: u32,
     pub created_at: String,
     pub updated_at: String,
     pub publish_at: String,
@@ -159,7 +157,7 @@ pub struct ChapterAttr {
 pub struct ChapterPages {
     pub hash: String,
     pub data: Vec<String>,
-    pub data_saver: Vec<String>,
+    // pub data_saver: Vec<String>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -176,23 +174,23 @@ pub struct Author {
 #[serde(rename_all = "camelCase")]
 pub struct AuthorAttr {
     pub name: String,
-    pub image_url: Option<String>,
-    pub biography: Option<LocalizedString>,
-    pub twitter: Option<String>,
-    pub pixiv: Option<String>,
-    pub melon_book: Option<String>,
-    pub fan_box: Option<String>,
-    pub booth: Option<String>,
-    pub nico_video: Option<String>,
-    pub skeb: Option<String>,
-    pub fantia: Option<String>,
-    pub tumblr: Option<String>,
-    pub youtube: Option<String>,
-    pub weibo: Option<String>,
-    pub naver: Option<String>,
-    pub namicomi: Option<String>,
-    pub website: Option<String>,
-    pub version: u32,
-    pub created_at: String,
-    pub updated_at: String,
+    // pub image_url: Option<String>,
+    // pub biography: Option<LocalizedString>,
+    // pub twitter: Option<String>,
+    // pub pixiv: Option<String>,
+    // pub melon_book: Option<String>,
+    // pub fan_box: Option<String>,
+    // pub booth: Option<String>,
+    // pub nico_video: Option<String>,
+    // pub skeb: Option<String>,
+    // pub fantia: Option<String>,
+    // pub tumblr: Option<String>,
+    // pub youtube: Option<String>,
+    // pub weibo: Option<String>,
+    // pub naver: Option<String>,
+    // pub namicomi: Option<String>,
+    // pub website: Option<String>,
+    // pub version: u32,
+    // pub created_at: String,
+    // pub updated_at: String,
 }

@@ -5,7 +5,7 @@ pub mod schema;
 
 use error::Error;
 use query::{chapter::ChapterQuery, manga::MangaQuery};
-use schema::{AuthorResponse, ChapterResponse, CustomResult, MangaResponse, PageResponse};
+use schema::{Author, AuthorInfo, CustomResult, MangaFeed, MangaList, PageHash};
 
 use serde::de::DeserializeOwned;
 use ureq::{self, Agent, AgentBuilder};
@@ -18,7 +18,6 @@ pub struct Mangadex {
 impl Mangadex {
     pub fn new(user_agent: &str) -> Mangadex {
         let agent = AgentBuilder::new().user_agent(user_agent).build();
-
         let base_url = String::from("https://api.mangadex.org");
 
         Mangadex { base_url, agent }
@@ -30,41 +29,43 @@ impl Mangadex {
         T: DeserializeOwned,
     {
         let response: CustomResult<T> = self.agent.get(url).call()?.into_json()?;
-
         match response {
-            CustomResult::Ok(i) => Ok(i),
-            CustomResult::Err(e) => Result::Err(e.into()),
+            CustomResult::Ok(r) => Ok(r),
+            CustomResult::Error(e) => Err(Error::Api(format!(
+                "API Error: {}",
+                e.errors.first().unwrap().title
+            ))),
         }
     }
 
     /// Function for searching manga from MangaDex API
-    pub fn search(&self, query: &MangaQuery) -> Result<MangaResponse, Error> {
+    pub fn search(&self, query: &MangaQuery) -> Result<MangaList, Error> {
         let query_string = serde_qs::to_string(query).unwrap();
         let url = format!("{}/manga?{}", self.base_url, query_string);
 
-        self.get::<MangaResponse>(&url)
+        Ok(self.get::<MangaList>(&url)?)
     }
 
     /// Function for fetching a manga's chapter list from MangaDex API
-    pub fn chapters(&self, id: &str, query: &ChapterQuery) -> Result<ChapterResponse, Error> {
+    pub fn chapters(&self, id: &str, query: &ChapterQuery) -> Result<MangaFeed, Error> {
         let query_string = serde_qs::to_string(query).unwrap();
         let url = format!("{}/manga/{}/feed?{}", self.base_url, id, query_string);
 
-        self.get::<ChapterResponse>(&url)
+        Ok(self.get::<MangaFeed>(&url)?)
     }
 
     /// Function for fetching a chapter's page hash from MangaDex API
-    pub fn page_hash(&self, id: &str) -> Result<PageResponse, Error> {
+    pub fn page_hash(&self, id: &str) -> Result<PageHash, Error> {
         let url = format!("{}/at-home/server/{}", self.base_url, id);
 
-        self.get::<PageResponse>(&url)
+        self.get::<PageHash>(&url)
     }
 
     /// Function for fetching a chapter's page hash from MangaDex API
-    pub fn author(&self, id: &str) -> Result<AuthorResponse, Error> {
+    pub fn author(&self, id: &str) -> Result<Author, Error> {
         let url = format!("{}/author/{}", self.base_url, id);
 
-        self.get::<AuthorResponse>(&url)
+        Ok(self.get::<AuthorInfo>(&url)?.data)
     }
 }
 
