@@ -322,7 +322,7 @@ mod tests {
         let result = serde_qs::to_string(&q).unwrap();
 
         let correct_result = String::from(
-            "limit=10\
+            "limit=20\
             &offset=0\
             &title=5Toubun+no+hanayome\
             &includedTagsMode=AND\
@@ -331,6 +331,7 @@ mod tests {
             &status[1]=completed\
             &status[2]=hiatus\
             &status[3]=cancelled\
+            &availableTranslatedLanguage[0]=en\
             &publicationDemographic[0]=shounen\
             &publicationDemographic[1]=shoujo\
             &publicationDemographic[2]=josei\
