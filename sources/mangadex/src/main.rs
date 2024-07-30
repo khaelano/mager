@@ -1,7 +1,7 @@
-use std::env;
 use std::io::{Read, Write};
 use std::net::{TcpListener, TcpStream};
 use std::sync::Arc;
+use std::{env, io};
 
 use serde_json;
 
@@ -21,19 +21,19 @@ pub fn main() {
     let port = args.get(1).unwrap();
 
     let listener = TcpListener::bind(format!("127.0.0.1:{port}")).unwrap();
+    // println!("listening at port {port}");
 
     for stream in listener.incoming() {
         let mut stream = stream.unwrap();
 
-        let mut length = [0; 4];
-        let _read = stream.read_exact(&mut length).unwrap();
-        let length = u32::from_ne_bytes(length) as usize;
+        let mut length: [u8; 4] = [0; 4];
+        stream.read_exact(&mut length).unwrap();
 
-        let mut request = vec![0; length];
-        let _read = stream.read_exact(&mut request).unwrap();
+        let mut request = vec![0; u32::from_ne_bytes(length) as usize];
+        stream.read_exact(&mut request).unwrap();
 
         let request: Request = serde_json::from_slice(&request).unwrap();
-        let _ = handle_request(request, stream);
+        handle_request(request, stream);
     }
 }
 
@@ -90,14 +90,16 @@ fn handle_request(request: Request, mut stream: TcpStream) {
         }
     };
 
-    let _ = write_to_stream(&mut stream, &response);
+    write_to_stream(&mut stream, &response).unwrap();
 }
 
-fn write_to_stream(stream: &mut TcpStream, payload: &str) {
+fn write_to_stream(stream: &mut TcpStream, payload: &str) -> Result<(), io::Error> {
     let size = payload.len() as u32;
-    let _ = stream.write_all(&size.to_ne_bytes());
-    let _ = stream.write_all(payload.as_bytes());
-    let _ = stream.flush();
+    stream.write_all(&size.to_ne_bytes())?;
+    stream.write_all(payload.as_bytes())?;
+    stream.flush()?;
+
+    Ok(())
 }
 
 fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<Vec<Chapter>, Error> {
@@ -155,7 +157,7 @@ fn get_chapter_pages(id: &str, user_agent: &str) -> Result<Vec<String>, Error> {
 
 fn search(keyword: &str, page: u32, filter: Filter, user_agent: &str) -> Result<MangaList, Error> {
     let client = Arc::new(Mangadex::new(user_agent));
-    let limit = 10;
+    let limit = 20;
     let query = &MangaQuery::new(keyword)
         .set_limit(limit)
         .set_offset((page - 1) * limit)
@@ -184,7 +186,7 @@ fn search(keyword: &str, page: u32, filter: Filter, user_agent: &str) -> Result<
     Ok(MangaList {
         data,
         page,
-        total_page: response.total / limit,
+        total_page: (response.total + limit - 1) / limit,
     })
 }
 
@@ -204,7 +206,7 @@ async fn extract_author(client: Arc<Mangadex>, md_manga: &MDManga) -> Vec<Author
             let cl = client.clone();
             let rl = rel.clone();
             let author = tokio::spawn(async move {
-                let name = cl.author(&rl.id).unwrap().data.attributes.name;
+                let name = cl.author(&rl.id).unwrap().attributes.name;
 
                 Author { name, details }
             });
@@ -220,14 +222,6 @@ async fn extract_author(client: Arc<Mangadex>, md_manga: &MDManga) -> Vec<Author
     authors
 }
 
-async fn extract_cover(
-    client: Arc<Mangadex>,
-    md_manga: &MDManga,
-    query: &MangaQuery,
-) -> Result<String, Error> {
-    todo!()
-}
-
 async fn convert_manga(client: Arc<Mangadex>, md_manga: MDManga) -> Result<Manga, Error> {
     let authors = extract_author(client.clone(), &md_manga).await;
     let attr = &md_manga.attributes;
@@ -237,7 +231,10 @@ async fn convert_manga(client: Arc<Mangadex>, md_manga: MDManga) -> Result<Manga
         .title
         .get("en")
         .cloned()
-        .or_else(|| attr.title.keys().next().cloned())
+        .or_else(|| {
+            let key: Vec<&String> = attr.title.keys().collect();
+            attr.title.get(key.first().cloned().unwrap()).cloned()
+        })
         .unwrap_or(String::from("Unknown Title"));
 
     let description = attr
