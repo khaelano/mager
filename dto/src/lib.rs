@@ -42,7 +42,10 @@ pub struct MangaList {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Manga {
-    pub url: String,
+    // Identifier could mean URL or hash code for each manga.
+    // Either way it doesn't matter because it doesn't affect the
+    // client in any way. But i suggest to use hash code if available
+    pub identifier: String,
     pub title: String,
     pub authors: Vec<Author>,
     pub original_language: String,
@@ -53,7 +56,10 @@ pub struct Manga {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Chapter {
-    pub url: String,
+    // Identifier could mean URL or hash code for each manga.
+    // Either way it doesn't matter because it doesn't affect the
+    // client in any way. But i suggest to use hash code if available
+    pub identifier: String,
     pub title: String,
     pub number: String,
     pub language: String,
