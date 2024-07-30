@@ -8,6 +8,7 @@ pub enum Demographic {
     Josei,
     Seinen,
     None,
+    Null,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
