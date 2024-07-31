@@ -125,6 +125,13 @@ pub struct Manga {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct ChapterList {
+    pub page: u32,
+    pub total_page: u32,
+    pub data: Vec<Chapter>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Chapter {
     // Identifier could mean URL or hash code for each manga.
     // Either way it doesn't matter because it doesn't affect the
