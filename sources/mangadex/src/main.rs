@@ -6,7 +6,7 @@ use std::{env, io};
 use serde_json;
 
 use dto::carriers::{self, Request, Response, Status};
-use dto::{Author, Chapter, Filter, Manga, MangaList};
+use dto::{Author, Chapter, ChapterList, Filter, Manga, MangaList};
 
 use mangadex::enums::RelationshipType;
 use mangadex::error::Error;
@@ -102,7 +102,7 @@ fn write_to_stream(stream: &mut TcpStream, payload: &str) -> Result<(), io::Erro
     Ok(())
 }
 
-fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<Vec<Chapter>, Error> {
+fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<ChapterList, Error> {
     let client = Arc::new(Mangadex::new(user_agent));
     let limit = 50;
     let offset = (page - 1) * 50;
@@ -115,7 +115,11 @@ fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<Vec
         chapters.push(convert_chapter(ch).unwrap());
     }
 
-    Ok(chapters)
+    Ok(ChapterList {
+        page,
+        total_page: (response.total + limit - 1) / limit,
+        data: chapters,
+    })
 }
 
 fn convert_chapter(md_chapter: MDChapter) -> Result<Chapter, Error> {
@@ -226,7 +230,6 @@ async fn convert_manga(client: Arc<Mangadex>, md_manga: MDManga) -> Result<Manga
     let authors = extract_author(client.clone(), &md_manga).await;
     let attr = &md_manga.attributes;
 
-    let url = format!("https://api.mangadex.org/manga/{}", md_manga.id);
     let title = attr
         .title
         .get("en")
@@ -250,7 +253,7 @@ async fn convert_manga(client: Arc<Mangadex>, md_manga: MDManga) -> Result<Manga
     let status = md_manga.attributes.status.to_dto();
 
     Ok(Manga {
-        identifier: url,
+        identifier: md_manga.id,
         title,
         authors,
         original_language,
