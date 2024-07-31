@@ -123,7 +123,7 @@ fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<Cha
 }
 
 fn convert_chapter(md_chapter: MDChapter) -> Result<Chapter, Error> {
-    let url = format!("https://api.mangadex.org/at-home/server/{}", md_chapter.id);
+    let identifier = md_chapter.id;
     let title = md_chapter
         .attributes
         .title
@@ -137,7 +137,7 @@ fn convert_chapter(md_chapter: MDChapter) -> Result<Chapter, Error> {
     let language = String::from("en");
 
     Ok(Chapter {
-        identifier: url,
+        identifier,
         title,
         number,
         language,
@@ -151,7 +151,7 @@ fn get_chapter_pages(id: &str, user_agent: &str) -> Result<Vec<String>, Error> {
     let mut urls = Vec::new();
     for h in result.chapter.data {
         urls.push(format!(
-            "https://{}/data/{}/{}",
+            "{}/data/{}/{}",
             result.base_url, result.chapter.hash, h
         ))
     }
