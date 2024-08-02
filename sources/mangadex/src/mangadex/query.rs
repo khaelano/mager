@@ -25,11 +25,11 @@ pub mod manga {
     #[derive(Debug, Serialize)]
     #[serde(rename_all(serialize = "camelCase"))]
     pub struct SortingOrder {
-        title: Order,
-        year: Order,
-        created_at: Order,
-        updated_at: Order,
-        latest_uploaded_chapter: Order,
+        // title: Order,
+        // year: Order,
+        // created_at: Order,
+        // updated_at: Order,
+        // latest_uploaded_chapter: Order,
         followed_count: Order,
         relevance: Order,
         rating: Order,
@@ -38,11 +38,11 @@ pub mod manga {
     impl SortingOrder {
         pub fn ascending() -> Self {
             SortingOrder {
-                title: Order::Ascending,
-                year: Order::Ascending,
-                created_at: Order::Ascending,
-                updated_at: Order::Ascending,
-                latest_uploaded_chapter: Order::Ascending,
+                // title: Order::Ascending,
+                // year: Order::Ascending,
+                // created_at: Order::Ascending,
+                // updated_at: Order::Ascending,
+                // latest_uploaded_chapter: Order::Ascending,
                 followed_count: Order::Ascending,
                 relevance: Order::Ascending,
                 rating: Order::Ascending,
@@ -51,11 +51,11 @@ pub mod manga {
 
         pub fn descending() -> Self {
             SortingOrder {
-                title: Order::Descending,
-                year: Order::Descending,
-                created_at: Order::Descending,
-                updated_at: Order::Descending,
-                latest_uploaded_chapter: Order::Descending,
+                // title: Order::Descending,
+                // year: Order::Descending,
+                // created_at: Order::Descending,
+                // updated_at: Order::Descending,
+                // latest_uploaded_chapter: Order::Descending,
                 followed_count: Order::Descending,
                 relevance: Order::Descending,
                 rating: Order::Descending,

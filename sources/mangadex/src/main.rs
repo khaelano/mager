@@ -104,7 +104,7 @@ fn write_to_stream(stream: &mut TcpStream, payload: &str) -> Result<(), io::Erro
 
 fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<ChapterList, Error> {
     let client = Arc::new(Mangadex::new(user_agent));
-    let limit = 50;
+    let limit = 40;
     let offset = (page - 1) * 50;
     let query = ChapterQuery::new(limit, offset).set_order(filter.sort.into());
 
@@ -210,9 +210,19 @@ async fn extract_author(client: Arc<Mangadex>, md_manga: &MDManga) -> Vec<Author
             let cl = client.clone();
             let rl = rel.clone();
             let author = tokio::spawn(async move {
-                let name = cl.author(&rl.id).unwrap().attributes.name;
+                let name: String = cl
+                    .author(&rl.id)
+                    .unwrap()
+                    .attributes
+                    .name
+                    .chars()
+                    .filter(|c| c.is_ascii() && *c != '(' && *c != ')')
+                    .collect::<String>();
 
-                Author { name, details }
+                Author {
+                    name: name.trim().to_string(),
+                    details,
+                }
             });
             handles.push(author);
         }
