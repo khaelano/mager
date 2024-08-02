@@ -1,7 +1,6 @@
 use std::env;
-use std::fs::File;
-use std::io::{self, stdin, stdout, Write};
-use std::path::{Path, PathBuf};
+use std::io::{stdin, stdout, Write};
+use std::path::PathBuf;
 use std::process;
 
 use crate::utils::{connect_to_source, download_resource, read_from_stream, write_to_stream};
@@ -9,89 +8,132 @@ use dto::carriers::{Command, Request, Response, Status};
 use dto::{Chapter, ChapterList, ChapterPages, Filter, Manga, MangaList, Order};
 
 use crate::MangaOperation;
+use termion::{self, terminal_size};
 
 fn print_chapter_list(cl: &ChapterList) {
+    let (width, _height) = terminal_size().unwrap();
+    let border = vec!["="; width as usize].join("");
+
+    let table_w = (width - 17) as f32;
+
+    let index_w = 5;
+    let chapter_w = (0.1 * table_w).floor() as usize;
+    let title_w = (0.8 * table_w).floor() as usize;
+    let date_w = (0.1 * table_w).floor() as usize;
+
+    println!("{border}");
+    let mut i = cl.data.len() as i32 - 1;
+    for ch in cl.data.iter().rev() {
+        let ch_title = if ch.title.len() >= title_w - 3 {
+            format!("{}...", &ch.title[..title_w - 3])
+        } else {
+            ch.title.clone()
+        };
+        println!(
+            "{:^iw$}    {:<cw$}    {:<tw$}    {:<dw$}",
+            i,
+            ch.number,
+            ch_title,
+            "00-00-0000",
+            iw = index_w,
+            cw = chapter_w,
+            tw = title_w,
+            dw = date_w
+        );
+        i -= 1;
+    }
+
+    println!("{border}");
     println!(
-        "Displaying Chapter List (page {} of {}):",
+        "{:^iw$}    {:<cw$}    {:<tw$}    {:<dw$}",
+        "Index",
+        "Chapter",
+        "Title",
+        "Date",
+        iw = index_w,
+        cw = chapter_w,
+        tw = title_w,
+        dw = date_w
+    );
+    println!("{border}");
+    println!(
+        "Displayed Chapter List (page {} of {}):",
         cl.page, cl.total_page
     );
-
-    let mut i = 1;
-    println!("Index    Chapter                              Title");
-    for ch in cl.data.iter() {
-        println!("{:>5}    {:<33}    {}", i, ch.number, ch.title);
-        i += 1;
-    }
 }
 
 fn print_mangalist(ml: &MangaList) {
+    let (width, _height) = terminal_size().unwrap();
+    let border = vec!["="; width as usize].join("");
+
+    let table_w = (width - 17) as f32;
+
+    let index_w = 5;
+    let title_w = (0.6 * table_w).floor() as usize;
+    let status_w = (0.1 * table_w).floor() as usize;
+    let authors_w = (0.3 * table_w).floor() as usize;
+
+    println!("{border}");
+    let mut i = ml.data.len() as i32 - 1;
+    for mg in ml.data.iter().rev() {
+        let mg_title_ellipsized = if mg.title.len() >= title_w - 3 {
+            format!("{}...", &mg.title[..title_w - 3])
+        } else {
+            mg.title.clone()
+        };
+
+        let mg_status = match mg.status {
+            dto::PublicationStatus::Ongoing => "Ongoing",
+            dto::PublicationStatus::Completed => "Completed",
+            dto::PublicationStatus::Hiatus => "Hiatus",
+            dto::PublicationStatus::Cancelled => "Cancelled",
+            dto::PublicationStatus::Unknown => "Unknown",
+        };
+
+        let mg_authors: String = mg
+            .authors
+            .iter()
+            .map(|a| format!("{} ({})", a.name, a.details))
+            .collect::<Vec<String>>()
+            .join(", ");
+
+        let mg_authors_ellipsized = if mg_authors.len() >= authors_w - 3 {
+            format!("{}...", &mg_authors[..authors_w - 3])
+        } else {
+            mg_authors
+        };
+
+        println!(
+            "{:^iw$}    {:<tw$}    {:<sw$}    {:<aw$}",
+            i,
+            mg_title_ellipsized,
+            mg_status,
+            mg_authors_ellipsized,
+            iw = index_w,
+            tw = title_w,
+            sw = status_w,
+            aw = authors_w
+        );
+        i -= 1;
+    }
+
+    println!("{border}");
     println!(
-        "Displaying Manga List (page {} of {}):",
+        "{:^iw$}    {:<tw$}    {:<sw$}    {:<aw$}",
+        "Index",
+        "Title",
+        "Status",
+        "Author",
+        iw = index_w,
+        tw = title_w,
+        sw = status_w,
+        aw = authors_w
+    );
+    println!("{border}");
+    println!(
+        "Displayed Manga List (page {} of {}):",
         ml.page, ml.total_page
     );
-
-    let mut i = 1;
-    for m in ml.data.iter() {
-        println!("{:>2}. {}", i, &m.title);
-        i += 1;
-    }
-}
-
-fn print_manga_info(manga: &Manga) {
-    println!("Displaying details for \"{}\":", manga.title);
-
-    let authors: Vec<String> = manga
-        .authors
-        .iter()
-        .map(|a| format!("{} ({})", a.name, a.details))
-        .collect();
-
-    println!("Authors           : {}", authors.join(", "));
-
-    let status = match manga.status {
-        dto::PublicationStatus::Ongoing => "Ongoing",
-        dto::PublicationStatus::Completed => "Completed",
-        dto::PublicationStatus::Hiatus => "Hiatus",
-        dto::PublicationStatus::Cancelled => "Cancelled",
-        dto::PublicationStatus::Unknown => "Unknown",
-    };
-    println!("Status            : {}", status);
-    println!("Original language : {}", manga.original_language);
-    println!("Language          : {}", manga.language);
-    println!();
-    println!("--Description--");
-    println!("{}", manga.description.trim());
-}
-
-fn fetch_chapter_list(
-    identifier: &str,
-    page: u32,
-    filter: Filter,
-) -> Result<ChapterList, io::Error> {
-    let req = Request {
-        command: Command::Chapters {
-            identifier: identifier.to_string(),
-            page,
-            filter,
-        },
-        version: String::from("0.0.0"),
-    };
-
-    let payload = serde_json::to_string(&req)?;
-
-    let mut connection = connect_to_source(7878)?;
-    write_to_stream(&payload, &mut connection)?;
-
-    let raw_response = read_from_stream(&mut connection)?;
-    let response: Response<ChapterList> = serde_json::from_slice(&raw_response)?;
-
-    match response.status {
-        Status::Ok => Ok(response.content),
-        Status::Error => Err(io::Error::new(
-            io::ErrorKind::NotFound,
-            "API response error",
-        )),
-    }
 }
 
 fn download_chapter(port: u16, manga_title: &str, chapter: &Chapter) {
@@ -165,8 +207,8 @@ fn browse_chapters(port: u16, manga: &Manga, mut page: u32) {
         print_chapter_list(ch_list);
         println!("Choose chapter index to download or perform an action");
         print!(
-            "Enter a command: [1-{}, n: next, p: prev, b: back]: ",
-            ch_list.data.len()
+            "Enter a command: [0-{}, n: next, p: prev, b: back]: ",
+            ch_list.data.len() - 1
         );
         stdout().flush().unwrap();
 
@@ -176,7 +218,7 @@ fn browse_chapters(port: u16, manga: &Manga, mut page: u32) {
         let input = input.trim();
         match input.parse::<u32>() {
             Ok(i) => {
-                let chapter = ch_list.data.get((i - 1) as usize).unwrap();
+                let chapter = ch_list.data.get((i) as usize).unwrap();
                 download_chapter(port, &manga.title, chapter);
                 break;
             }
@@ -217,8 +259,8 @@ fn browse_manga(port: u16, keyword: &str, mut page: u32) {
         print_mangalist(&mn_list); // Display search result
         println!("Choose manga index to see or perform an action");
         print!(
-            "Enter a command [1-{}, n: next, p: prev, a: abort]: ",
-            mn_list.data.len()
+            "Enter a command [0-{}, n: next, p: prev, a: abort]: ",
+            mn_list.data.len() - 1
         );
         stdout().flush().unwrap();
 
@@ -228,9 +270,7 @@ fn browse_manga(port: u16, keyword: &str, mut page: u32) {
         let input = input.trim();
         match input.parse::<u32>() {
             Ok(i) => {
-                let manga = mn_list.data.get((i - 1) as usize).unwrap();
-                print_manga_info(manga);
-
+                let manga = mn_list.data.get((i) as usize).unwrap();
                 browse_chapters(port, manga, 1);
                 break;
             }
