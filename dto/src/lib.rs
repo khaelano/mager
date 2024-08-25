@@ -36,10 +36,19 @@ pub mod carriers {
 
     use super::*;
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     pub struct Request {
         pub command: Command,
         pub version: String,
+    }
+
+    impl Request {
+        pub fn next_page(&self) -> Option<Request> {
+            self.command.next_page().map(|c| Request {
+                command: c,
+                version: self.version.clone(),
+            })
+        }
     }
 
     #[derive(Serialize, Deserialize, Debug)]
@@ -50,7 +59,7 @@ pub mod carriers {
         pub content: T,
     }
 
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     #[serde(tag = "command", content = "args")]
     pub enum Command {
         Ping,
@@ -69,6 +78,33 @@ pub mod carriers {
         },
     }
 
+    impl Command {
+        fn next_page(&self) -> Option<Command> {
+            match self.clone() {
+                Command::Ping => None,
+                Command::Search {
+                    keyword,
+                    page,
+                    filter,
+                } => Some(Command::Search {
+                    keyword,
+                    page: page + 1,
+                    filter,
+                }),
+                Command::Chapters {
+                    identifier,
+                    page,
+                    filter,
+                } => Some(Command::Chapters {
+                    identifier,
+                    page: page + 1,
+                    filter,
+                }),
+                Command::Pages { identifier: _ } => None,
+            }
+        }
+    }
+
     #[derive(Serialize, Deserialize, Debug)]
     pub enum Status {
         Ok,
@@ -76,7 +112,7 @@ pub mod carriers {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Filter {
     pub language: String,
     pub sort: Order,
@@ -88,7 +124,7 @@ pub enum Order {
     Descending,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum PublicationStatus {
     Ongoing,
     Completed,
@@ -97,20 +133,20 @@ pub enum PublicationStatus {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Author {
     pub name: String,
     pub details: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MangaList {
     pub page: u32,
     pub total_page: u32,
     pub data: Vec<Manga>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Manga {
     // Identifier could mean URL or hash code for each manga.
     // Either way it doesn't matter because it doesn't affect the
@@ -124,14 +160,14 @@ pub struct Manga {
     pub status: PublicationStatus,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChapterList {
     pub page: u32,
     pub total_page: u32,
     pub data: Vec<Chapter>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Chapter {
     // Identifier could mean URL or hash code for each manga.
     // Either way it doesn't matter because it doesn't affect the

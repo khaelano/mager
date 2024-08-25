@@ -1,11 +1,21 @@
 mod config;
+mod mager;
 mod manga;
 mod source;
 mod utils;
 
+use std::io::stdout;
+
+use mager::*;
+
 use clap::{Parser, Subcommand};
 
-use manga::manga_menu_handler;
+use ratatui::prelude::CrosstermBackend;
+use ratatui::Terminal;
+
+use crossterm::terminal;
+use crossterm::terminal::{EnterAlternateScreen, LeaveAlternateScreen};
+use crossterm::ExecutableCommand;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
@@ -40,17 +50,18 @@ enum MangaOperation {
 }
 
 fn main() {
+    // Parsing the arguments
     let args = Arguments::parse();
 
-    match args.menu {
-        Menu::Manga { source, operation } => {
-            manga_menu_handler(&source, &operation);
-        }
-        Menu::Source => {
-            println!("Hello world! this is a source operation");
-        }
-        Menu::Config => {
-            println!("Hello world! this is a source operation");
-        }
-    };
+    // Boilerplate
+    stdout().execute(EnterAlternateScreen).unwrap();
+    terminal::enable_raw_mode().unwrap();
+    let backend = CrosstermBackend::new(stdout());
+    let mut terminal = Terminal::new(backend).unwrap();
+
+    let mut mager = Mager::init(args);
+    mager.run(&mut terminal);
+
+    terminal::disable_raw_mode().unwrap();
+    stdout().execute(LeaveAlternateScreen).unwrap();
 }
