@@ -25,11 +25,11 @@ pub mod manga {
     #[derive(Debug, Serialize)]
     #[serde(rename_all(serialize = "camelCase"))]
     pub struct SortingOrder {
-        // title: Order,
-        // year: Order,
-        // created_at: Order,
-        // updated_at: Order,
-        // latest_uploaded_chapter: Order,
+        title: Order,
+        year: Order,
+        created_at: Order,
+        updated_at: Order,
+        latest_uploaded_chapter: Order,
         followed_count: Order,
         relevance: Order,
         rating: Order,
@@ -38,11 +38,11 @@ pub mod manga {
     impl SortingOrder {
         pub fn ascending() -> Self {
             SortingOrder {
-                // title: Order::Ascending,
-                // year: Order::Ascending,
-                // created_at: Order::Ascending,
-                // updated_at: Order::Ascending,
-                // latest_uploaded_chapter: Order::Ascending,
+                title: Order::Ascending,
+                year: Order::Ascending,
+                created_at: Order::Ascending,
+                updated_at: Order::Ascending,
+                latest_uploaded_chapter: Order::Ascending,
                 followed_count: Order::Ascending,
                 relevance: Order::Ascending,
                 rating: Order::Ascending,
@@ -51,11 +51,11 @@ pub mod manga {
 
         pub fn descending() -> Self {
             SortingOrder {
-                // title: Order::Descending,
-                // year: Order::Descending,
-                // created_at: Order::Descending,
-                // updated_at: Order::Descending,
-                // latest_uploaded_chapter: Order::Descending,
+                title: Order::Descending,
+                year: Order::Descending,
+                created_at: Order::Descending,
+                updated_at: Order::Descending,
+                latest_uploaded_chapter: Order::Descending,
                 followed_count: Order::Descending,
                 relevance: Order::Descending,
                 rating: Order::Descending,
@@ -74,7 +74,7 @@ pub mod manga {
 
     #[derive(Debug, Serialize)]
     #[serde(rename_all(serialize = "camelCase"))]
-    pub struct MangaQuery {
+    pub struct SearchQuery {
         limit: u32,
         offset: u32,
         title: Option<String>,
@@ -102,9 +102,9 @@ pub mod manga {
         group: Option<Uuid>,
     }
 
-    impl MangaQuery {
+    impl SearchQuery {
         pub fn new(title: &str) -> Self {
-            MangaQuery {
+            SearchQuery {
                 title: Some(title.to_string()),
                 ..Default::default()
             }
@@ -126,9 +126,9 @@ pub mod manga {
         }
     }
 
-    impl Default for MangaQuery {
+    impl Default for SearchQuery {
         fn default() -> Self {
-            MangaQuery {
+            SearchQuery {
                 limit: 20,
                 offset: 0,
                 title: None,
@@ -314,11 +314,11 @@ where
 #[cfg(test)]
 mod tests {
     use super::chapter::ChapterQuery;
-    use super::manga::MangaQuery;
+    use super::manga::SearchQuery;
 
     #[test]
     fn manga_query() {
-        let q = MangaQuery::new("5Toubun no hanayome");
+        let q = SearchQuery::new("5Toubun no hanayome");
         let result = serde_qs::to_string(&q).unwrap();
 
         let correct_result = String::from(

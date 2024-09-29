@@ -1,150 +1,295 @@
+use color_eyre::eyre::{eyre, Report};
+use color_eyre::Result;
+use futures::future;
+use tokio::task::JoinHandle;
+
+use std::env;
 use std::io::{Read, Write};
 use std::net::{TcpListener, TcpStream};
 use std::sync::Arc;
-use std::{env, io};
-
-use serde_json;
 
 use dto::carriers::{self, Request, Response, Status};
-use dto::{Author, Chapter, ChapterList, Filter, Manga, MangaList};
+use dto::*;
 
 use mangadex::enums::RelationshipType;
-use mangadex::error::Error;
-use mangadex::query::{chapter::ChapterQuery, manga::MangaQuery};
-use mangadex::schema::{Chapter as MDChapter, Manga as MDManga};
+use mangadex::query::{chapter::ChapterQuery, manga::SearchQuery};
+use mangadex::schema::{self, Manga as MDManga};
 use mangadex::Mangadex;
 
 mod mangadex;
 
-pub fn main() {
+#[tokio::main]
+pub async fn main() -> Result<()> {
+    color_eyre::install()?;
     let args: Vec<String> = env::args().collect();
     let port = args.get(1).unwrap();
 
-    let listener = TcpListener::bind(format!("127.0.0.1:{port}")).unwrap();
-    // println!("listening at port {port}");
+    let listener = TcpListener::bind(format!("127.0.0.1:{port}"))?;
 
     for stream in listener.incoming() {
-        let mut stream = stream.unwrap();
+        let mut stream = stream?;
 
         let mut length: [u8; 4] = [0; 4];
-        stream.read_exact(&mut length).unwrap();
+        stream.read_exact(&mut length)?;
 
         let mut request = vec![0; u32::from_ne_bytes(length) as usize];
-        stream.read_exact(&mut request).unwrap();
+        stream.read_exact(&mut request)?;
 
-        let request: Request = serde_json::from_slice(&request).unwrap();
-        handle_request(request, stream);
+        let request: Request = serde_json::from_slice(&request)?;
+        handle_request(request, stream).await?;
     }
+    Ok(())
 }
 
-fn handle_request(request: Request, mut stream: TcpStream) {
+async fn handle_request(request: Request, mut stream: TcpStream) -> Result<()> {
     let client_name = String::from("MangaDex");
     let user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0";
     let response = match request.command {
-        carriers::Command::Search {
-            keyword,
-            page,
-            filter,
-        } => {
-            let mangas = search(&keyword, page, filter, user_agent).unwrap();
-            let content = Response {
-                status: Status::Ok,
-                reason: String::from("Feeling good today aren't we?"),
-                source_name: client_name.clone(),
-                content: mangas,
-            };
-            serde_json::to_string(&content).unwrap()
-        }
-        carriers::Command::Chapters {
-            identifier,
-            page,
-            filter,
-        } => {
-            let chapters = chapters(&identifier, page, filter, user_agent).unwrap();
-            let content = Response {
-                status: Status::Ok,
-                reason: String::from("Feeling good today aren't we?"),
-                source_name: client_name.clone(),
-                content: chapters,
-            };
-            serde_json::to_string(&content).unwrap()
-        }
-        carriers::Command::Pages { identifier } => {
-            let pages = get_chapter_pages(&identifier, user_agent).unwrap();
-            let content = Response {
-                status: Status::Ok,
-                reason: String::from("Feeling good today aren't we?"),
-                source_name: client_name.clone(),
-                content: pages,
-            };
-            serde_json::to_string(&content).unwrap()
-        }
         carriers::Command::Ping => {
             let content = Response {
                 status: Status::Ok,
                 reason: String::from("Pong, this source is active"),
                 source_name: client_name.clone(),
-                content: (),
+                content: Some(()),
             };
-            serde_json::to_string(&content).unwrap()
+            serde_json::to_string(&content)?
+        }
+        carriers::Command::Search {
+            keyword,
+            page,
+            filter,
+        } => {
+            let content = search(&keyword, page, filter, user_agent);
+            serde_json::to_string(&content)?
+        }
+        carriers::Command::FetchManga { manga_identifier } => {
+            let content = fetch_manga(&manga_identifier, user_agent).await;
+            serde_json::to_string(&content)?
+        }
+        carriers::Command::FetchChapterList {
+            identifier,
+            page,
+            filter,
+        } => {
+            let content = fetch_chapter_list(&identifier, page, filter, user_agent);
+            serde_json::to_string(&content)?
+        }
+        carriers::Command::FetchChapter { chapter_identifier } => {
+            let content = fetch_chapter(&chapter_identifier, user_agent);
+            serde_json::to_string(&content)?
         }
     };
 
-    write_to_stream(&mut stream, &response).unwrap();
+    write_to_stream(&mut stream, &response)
 }
 
-fn write_to_stream(stream: &mut TcpStream, payload: &str) -> Result<(), io::Error> {
-    let size = payload.len() as u32;
-    stream.write_all(&size.to_ne_bytes())?;
-    stream.write_all(payload.as_bytes())?;
-    stream.flush()?;
-
-    Ok(())
-}
-
-fn chapters(id: &str, page: u32, filter: Filter, user_agent: &str) -> Result<ChapterList, Error> {
+fn search(keyword: &str, page: u32, filter: Filter, user_agent: &str) -> Response<MangaList> {
     let client = Arc::new(Mangadex::new(user_agent));
+    let source_name = "MangaDex".to_string();
+    let limit = 20;
+    let query = &SearchQuery::new(keyword)
+        .set_limit(limit)
+        .set_offset((page - 1) * limit)
+        .set_order(filter.sort.clone().into());
+
+    let mglist_cont = match client.search(query) {
+        Ok(mglist_cont) => mglist_cont,
+        Err(report) => return create_error_response(report, &source_name),
+    };
+
+    let total_page = (mglist_cont.total + limit - 1) / limit;
+    let data = mglist_cont
+        .data
+        .into_iter()
+        .map(|mg| {
+            let title = extract_title("en", &mg).unwrap_or(String::from("Unknown Title"));
+            let identifier = mg.id;
+            let attr = mg.attributes;
+            let status = attr.status.to_dto();
+
+            MangaListEntry {
+                identifier,
+                title,
+                status,
+            }
+        })
+        .collect::<Vec<MangaListEntry>>();
+
+    Response {
+        status: Status::Ok,
+        reason: "All good".to_string(),
+        source_name,
+        content: Some(MangaList {
+            page,
+            total_page,
+            data,
+        }),
+    }
+}
+
+/// This function will fetch manga details for a specified manga id
+async fn fetch_manga(id: &str, user_agent: &str) -> Response<Manga> {
+    let client = Arc::new(Mangadex::new(user_agent));
+    let source_name = "MangaDex".to_string();
+
+    let manga = match client.manga(id) {
+        Ok(mg_cont) => mg_cont.data,
+        Err(report) => return create_error_response(report, &source_name),
+    };
+
+    let authors = match extract_author(client.clone(), &manga).await {
+        Ok(authors) => authors,
+        Err(report) => return create_error_response(report, &source_name),
+    };
+
+    let title = extract_title("en", &manga).unwrap_or("Unknown Title".to_string());
+    let identifier = manga.id;
+    let attr = manga.attributes;
+    let description = attr
+        .description
+        .as_ref()
+        .and_then(|desc| desc.get("en"))
+        .cloned()
+        .unwrap_or(String::from("No description"));
+    let original_language = attr.original_language;
+    let status = attr.status.to_dto();
+    // For now, it only supports english language
+    let language = String::from("en");
+
+    Response {
+        status: Status::Ok,
+        reason: "All good!".to_string(),
+        source_name: source_name.clone(),
+        content: Some(Manga {
+            identifier,
+            title,
+            authors,
+            original_language,
+            language,
+            description,
+            status,
+        }),
+    }
+}
+
+fn fetch_chapter_list(
+    id: &str,
+    page: u32,
+    filter: Filter,
+    user_agent: &str,
+) -> Response<ChapterList> {
+    let client = Arc::new(Mangadex::new(user_agent));
+    let client_name = String::from("MangaDex");
     let limit = 40;
     let offset = (page - 1) * 50;
     let query = ChapterQuery::new(limit, offset).set_order(filter.sort.into());
 
-    let response = client.chapters(id, &query).unwrap();
+    let chlist_cont = match client.chapters(id, &query) {
+        Err(report) => return create_error_response(report, &client_name),
+        Ok(chlist_cont) => chlist_cont,
+    };
 
-    let mut chapters = Vec::new();
-    for ch in response.data {
-        chapters.push(convert_chapter(ch).unwrap());
+    let total_page = (chlist_cont.total + limit - 1) / limit;
+    let data = chlist_cont
+        .data
+        .into_iter()
+        .map(|ch| {
+            let identifier = ch.id;
+            let title = ch.attributes.title.unwrap_or("No title".to_string());
+            let number = ch.attributes.chapter.unwrap_or("No number".to_string());
+
+            ChapterListEntry {
+                identifier,
+                title,
+                number,
+            }
+        })
+        .collect();
+
+    Response {
+        status: Status::Ok,
+        reason: String::from("All good"),
+        source_name: client_name,
+        content: Some(ChapterList {
+            page,
+            total_page,
+            data,
+        }),
+    }
+}
+
+fn fetch_chapter(id: &str, user_agent: &str) -> Response<Chapter> {
+    let client = Arc::new(Mangadex::new(user_agent));
+    let source_name = "MangaDex".to_string();
+
+    let ch_container = match client.chapter(id) {
+        Ok(ch_cont) => ch_cont,
+        Err(report) => return create_error_response(report, &source_name),
+    };
+
+    let page_urls = match get_chapter_pages(id, user_agent) {
+        Ok(pages) => pages,
+        Err(report) => return create_error_response(report, &source_name),
+    };
+
+    let chapter = ch_container.data;
+    let identifier = chapter.id;
+    let attr = &chapter.attributes;
+
+    // This code will find the chapter's origin manga
+    let mut manga_identifier = String::from("");
+    for rel in chapter.relationships.unwrap() {
+        if let RelationshipType::Manga = rel.rel_type {
+            manga_identifier = rel.id.clone();
+        }
     }
 
-    Ok(ChapterList {
-        page,
-        total_page: (response.total + limit - 1) / limit,
-        data: chapters,
-    })
+    let title = attr.title.clone().unwrap_or(String::from("No Title"));
+    let number = attr.chapter.clone().unwrap_or(String::from("No Number"));
+    let language = attr.translated_language.clone();
+
+    Response {
+        status: Status::Ok,
+        reason: "All good".to_string(),
+        source_name,
+        content: Some(Chapter {
+            identifier,
+            manga_identifier,
+            title,
+            number,
+            language,
+            page_urls,
+        }),
+    }
 }
 
-fn convert_chapter(md_chapter: MDChapter) -> Result<Chapter, Error> {
-    let identifier = md_chapter.id;
-    let title = md_chapter
-        .attributes
-        .title
-        .unwrap_or(String::from("No Title"));
-    let number = md_chapter
-        .attributes
-        .chapter
-        .and_then(|s| Some(s.clone()))
-        .unwrap_or(String::from("No Chapter"));
+fn create_error_response<T>(report: Report, source_name: &str) -> Response<T> {
+    let err_msg = report
+        .downcast::<ureq::Error>()
+        .ok()
+        .and_then(|err| match err {
+            ureq::Error::Status(code, response) => response
+                .into_json::<schema::ErrorResponse>()
+                .map(|resp| {
+                    resp.errors
+                        .first()
+                        .map(|e| format!("{}: {}", code, e.title))
+                })
+                .unwrap_or(Some("Unknown error".to_string())),
 
-    let language = String::from("en");
+            ureq::Error::Transport(transport) => transport.message().map(|m| m.to_string()),
+        })
+        .unwrap_or("Unknown error".to_string());
 
-    Ok(Chapter {
-        identifier,
-        title,
-        number,
-        language,
-    })
+    Response {
+        status: Status::Error,
+        reason: err_msg,
+        source_name: source_name.to_string(),
+        content: None,
+    }
 }
 
-fn get_chapter_pages(id: &str, user_agent: &str) -> Result<Vec<String>, Error> {
+fn get_chapter_pages(id: &str, user_agent: &str) -> Result<Vec<String>> {
     let client = Arc::new(Mangadex::new(user_agent));
     let result = client.page_hash(id).unwrap();
 
@@ -159,46 +304,28 @@ fn get_chapter_pages(id: &str, user_agent: &str) -> Result<Vec<String>, Error> {
     Ok(urls)
 }
 
-fn search(keyword: &str, page: u32, filter: Filter, user_agent: &str) -> Result<MangaList, Error> {
-    let client = Arc::new(Mangadex::new(user_agent));
-    let limit = 20;
-    let query = &MangaQuery::new(keyword)
-        .set_limit(limit)
-        .set_offset((page - 1) * limit)
-        .set_order(filter.sort.clone().into());
-
-    let rt = tokio::runtime::Builder::new_multi_thread()
-        .enable_io()
-        .build()
-        .unwrap();
-
-    let response = client.search(query).unwrap(); // Fix this ass bro
-
-    // This is all concurrency bulshit
-    let mut handles = Vec::new();
-    for md_manga in response.data {
-        handles.push(rt.spawn(convert_manga(client.clone(), md_manga)));
-    }
-
-    let mut data = Vec::new();
-    for h in handles {
-        data.push(
-            rt.block_on(h).unwrap().unwrap(), // Fix this bro
-        );
-    }
-
-    Ok(MangaList {
-        data,
-        page,
-        total_page: (response.total + limit - 1) / limit,
+/// This function will try to extract manga title for the preferred language. If the
+/// preferred language doesn't exist, it will try to use whatever the first title is available.
+/// If it doesn't exist too, it will return None.
+fn extract_title(preferred_lang: &str, manga: &MDManga) -> Option<String> {
+    let attr = &manga.attributes;
+    attr.title.get(preferred_lang).cloned().or_else(|| {
+        attr.title
+            .keys()
+            .next()
+            .and_then(|k| attr.title.get(k).cloned())
     })
 }
 
 /// This function will extract the author and artist from the manga's relation list
-async fn extract_author(client: Arc<Mangadex>, md_manga: &MDManga) -> Vec<Author> {
+async fn extract_author(client: Arc<Mangadex>, md_manga: &MDManga) -> Result<Vec<Author>> {
     let mut handles = Vec::new();
 
-    for rel in md_manga.relationships.as_ref().unwrap() {
+    let Some(relationships) = &md_manga.relationships else {
+        return Err(eyre!("There's no relationships".to_string()));
+    };
+
+    for rel in relationships {
         // Checks if the relation is artist or author
         if let RelationshipType::Artist | RelationshipType::Author = rel.rel_type {
             let details = match rel.rel_type {
@@ -209,66 +336,38 @@ async fn extract_author(client: Arc<Mangadex>, md_manga: &MDManga) -> Vec<Author
 
             let cl = client.clone();
             let rl = rel.clone();
-            let author = tokio::spawn(async move {
+            let author: JoinHandle<Result<Author>> = tokio::spawn(async move {
                 let name: String = cl
-                    .author(&rl.id)
-                    .unwrap()
+                    .author(&rl.id)?
                     .attributes
                     .name
                     .chars()
                     .filter(|c| c.is_ascii() && *c != '(' && *c != ')')
                     .collect::<String>();
 
-                Author {
+                Ok(Author {
                     name: name.trim().to_string(),
                     details,
-                }
+                })
             });
             handles.push(author);
         }
     }
 
-    let mut authors = Vec::new();
-    for handle in handles {
-        authors.push(handle.await.unwrap());
+    let mut authors: Vec<Author> = Vec::new();
+
+    for handle in future::join_all(handles).await {
+        authors.push(handle??);
     }
 
-    authors
+    Ok(authors)
 }
 
-async fn convert_manga(client: Arc<Mangadex>, md_manga: MDManga) -> Result<Manga, Error> {
-    let authors = extract_author(client.clone(), &md_manga).await;
-    let attr = &md_manga.attributes;
+fn write_to_stream(stream: &mut TcpStream, payload: &str) -> Result<()> {
+    let size = payload.len() as u32;
+    stream.write_all(&size.to_ne_bytes())?;
+    stream.write_all(payload.as_bytes())?;
+    stream.flush()?;
 
-    let title = attr
-        .title
-        .get("en")
-        .cloned()
-        .or_else(|| {
-            let key: Vec<&String> = attr.title.keys().collect();
-            attr.title.get(key.first().cloned().unwrap()).cloned()
-        })
-        .unwrap_or(String::from("Unknown Title"));
-
-    let description = attr
-        .description
-        .as_ref()
-        .and_then(|desc| desc.get("en"))
-        .cloned()
-        .unwrap_or(String::from("No description"));
-
-    let original_language = attr.original_language.clone();
-    // For now, it only supports english language
-    let language = String::from("en");
-    let status = md_manga.attributes.status.to_dto();
-
-    Ok(Manga {
-        identifier: md_manga.id,
-        title,
-        authors,
-        original_language,
-        language,
-        description,
-        status,
-    })
+    Ok(())
 }

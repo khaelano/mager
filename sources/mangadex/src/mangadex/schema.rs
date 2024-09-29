@@ -24,8 +24,19 @@ impl std::fmt::Display for ErrorResponse {
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MangaList {
-    // pub result: String,
+pub struct MangaContainer {
+    pub response: String,
+    pub data: Manga,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct ChapterContainer {
+    pub response: String,
+    pub data: Chapter,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct MangaListContainer {
     pub response: String,
     pub data: Vec<Manga>,
     pub limit: u32,
@@ -34,7 +45,7 @@ pub struct MangaList {
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MangaFeed {
+pub struct MangaFeedContainer {
     pub response: String,
     pub data: Vec<Chapter>,
     pub limit: u32,

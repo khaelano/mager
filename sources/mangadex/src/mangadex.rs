@@ -1,11 +1,10 @@
 pub mod enums;
-pub mod error;
 pub mod query;
 pub mod schema;
 
-use error::Error;
-use query::{chapter::ChapterQuery, manga::MangaQuery};
-use schema::{Author, AuthorInfo, CustomResult, MangaFeed, MangaList, PageHash};
+use color_eyre::{eyre::eyre, Result};
+use query::{chapter::ChapterQuery, manga::SearchQuery};
+use schema::CustomResult;
 
 use serde::de::DeserializeOwned;
 use ureq::{self, Agent, AgentBuilder};
@@ -24,14 +23,14 @@ impl Mangadex {
     }
 
     /// Function for sending a GET method to MangaDex API, then deserialize it to T
-    fn get<T>(&self, url: &str) -> Result<T, Error>
+    fn get<T>(&self, url: &str) -> Result<T>
     where
         T: DeserializeOwned,
     {
         let response: CustomResult<T> = self.agent.get(url).call()?.into_json()?;
         match response {
             CustomResult::Ok(r) => Ok(r),
-            CustomResult::Error(e) => Err(Error::Api(format!(
+            CustomResult::Error(e) => Err(eyre!(format!(
                 "API Error: {}",
                 e.errors.first().unwrap().title
             ))),
@@ -39,33 +38,47 @@ impl Mangadex {
     }
 
     /// Function for searching manga from MangaDex API
-    pub fn search(&self, query: &MangaQuery) -> Result<MangaList, Error> {
-        let query_string = serde_qs::to_string(query).unwrap();
+    pub(crate) fn search(&self, query: &SearchQuery) -> Result<schema::MangaListContainer> {
+        let query_string = serde_qs::to_string(query)?;
         let url = format!("{}/manga?{}", self.base_url, query_string);
 
-        Ok(self.get::<MangaList>(&url)?)
+        self.get::<schema::MangaListContainer>(&url)
     }
 
     /// Function for fetching a manga's chapter list from MangaDex API
-    pub fn chapters(&self, id: &str, query: &ChapterQuery) -> Result<MangaFeed, Error> {
-        let query_string = serde_qs::to_string(query).unwrap();
+    pub(crate) fn chapters(
+        &self,
+        id: &str,
+        query: &ChapterQuery,
+    ) -> Result<schema::MangaFeedContainer> {
+        let query_string = serde_qs::to_string(query)?;
         let url = format!("{}/manga/{}/feed?{}", self.base_url, id, query_string);
 
-        Ok(self.get::<MangaFeed>(&url)?)
+        self.get::<schema::MangaFeedContainer>(&url)
+    }
+
+    /// Function for fetching a manga details
+    pub(crate) fn manga(&self, id: &str) -> Result<schema::MangaContainer> {
+        self.get::<schema::MangaContainer>(&format!("{}/manga/{}", self.base_url, id))
+    }
+
+    /// Function for fetching a chapter details
+    pub(crate) fn chapter(&self, id: &str) -> Result<schema::ChapterContainer> {
+        self.get::<schema::ChapterContainer>(&format!("{}/chapter/{}", self.base_url, id))
     }
 
     /// Function for fetching a chapter's page hash from MangaDex API
-    pub fn page_hash(&self, id: &str) -> Result<PageHash, Error> {
+    pub(crate) fn page_hash(&self, id: &str) -> Result<schema::PageHash> {
         let url = format!("{}/at-home/server/{}", self.base_url, id);
 
-        self.get::<PageHash>(&url)
+        self.get::<schema::PageHash>(&url)
     }
 
     /// Function for fetching a chapter's page hash from MangaDex API
-    pub fn author(&self, id: &str) -> Result<Author, Error> {
+    pub(crate) fn author(&self, id: &str) -> Result<schema::Author> {
         let url = format!("{}/author/{}", self.base_url, id);
 
-        Ok(self.get::<AuthorInfo>(&url)?.data)
+        Ok(self.get::<schema::AuthorInfo>(&url)?.data)
     }
 }
 
@@ -76,7 +89,7 @@ pub mod tests {
 
     #[test]
     fn manga_search_valid() {
-        let query = manga::MangaQuery::new("5Toubun no hanayome");
+        let query = manga::SearchQuery::new("5Toubun no hanayome");
         let client =
             Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
@@ -86,7 +99,7 @@ pub mod tests {
 
     #[test]
     fn manga_search_invalid() {
-        let query = manga::MangaQuery::new("aifjaodfaodjf");
+        let query = manga::SearchQuery::new("aifjaodfaodjf");
         let client =
             Mangadex::new("Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0");
 
