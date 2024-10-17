@@ -1,0 +1,356 @@
+[2m2024-10-17T07:36:25.150350Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:25.150574Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:25.150834Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:25.150924Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:30.193524Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:30.193881Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:30.194261Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:30.194456Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:31.289459Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:31.289797Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:31.290120Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:31.290285Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:35.769953Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:35.770324Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:35.770722Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:35.770875Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:37.013294Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:37.013659Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:37.014621Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:36:37.014909Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:36:38.373684Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout waiting for idle connection: ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:36:38.373887Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m Http::connect; scheme=Some("https"), host=Some("cmdxd98sb0x3yprd.mangadex.network"), port=None
+[2m2024-10-17T07:36:38.374177Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::dns[0m[2m:[0m resolving host="cmdxd98sb0x3yprd.mangadex.network"
+[2m2024-10-17T07:36:38.859242Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to 172.67.185.252:443
+[2m2024-10-17T07:36:39.160563Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to [2606:4700:3036::ac43:b9fc]:443
+[2m2024-10-17T07:36:39.160867Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connect error for [2606:4700:3036::ac43:b9fc]:443: ConnectError("tcp connect error", Os { code: 101, kind: NetworkUnreachable, message: "Network is unreachable" })
+[2m2024-10-17T07:36:39.160949Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to [2606:4700:3032::6815:6e]:443
+[2m2024-10-17T07:36:39.161079Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connect error for [2606:4700:3032::6815:6e]:443: ConnectError("tcp connect error", Os { code: 101, kind: NetworkUnreachable, message: "Network is unreachable" })
+[2m2024-10-17T07:36:39.473446Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connected to 172.67.185.252:443
+[2m2024-10-17T07:36:39.589112Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::client[0m[2m:[0m http1 handshake complete, spawning background dispatcher task
+[2m2024-10-17T07:36:39.589399Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout dropped for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:36:39.782300Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.000032237265
+[2m2024-10-17T07:36:39.782539Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.0027905384
+[2m2024-10-17T07:36:39.782626Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.0055488395
+[2m2024-10-17T07:36:39.782672Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.00830714
+[2m2024-10-17T07:36:39.782721Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.011065442
+[2m2024-10-17T07:36:39.783505Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.013823743
+[2m2024-10-17T07:36:39.783689Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.016582044
+[2m2024-10-17T07:36:39.785952Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.019340346
+[2m2024-10-17T07:36:39.786070Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.022098646
+[2m2024-10-17T07:36:39.786185Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.024856947
+[2m2024-10-17T07:36:39.786291Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.02761525
+[2m2024-10-17T07:36:39.786423Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.03037355
+[2m2024-10-17T07:36:39.786578Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.03313185
+[2m2024-10-17T07:36:39.786655Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.03589015
+[2m2024-10-17T07:36:39.786715Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.038648453
+[2m2024-10-17T07:36:39.786836Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.041406754
+[2m2024-10-17T07:36:39.787018Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.044165056
+[2m2024-10-17T07:36:39.787115Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.046923354
+[2m2024-10-17T07:36:39.787198Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.049681656
+[2m2024-10-17T07:36:39.787280Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.052439958
+[2m2024-10-17T07:36:39.787403Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.05519826
+[2m2024-10-17T07:36:39.787559Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.05795656
+[2m2024-10-17T07:36:39.790945Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.060714863
+[2m2024-10-17T07:36:39.791176Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.06314676
+[2m2024-10-17T07:36:39.791321Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.065905064
+[2m2024-10-17T07:36:39.791497Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.06866336
+[2m2024-10-17T07:36:39.791642Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.07142166
+[2m2024-10-17T07:36:39.791796Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.07417996
+[2m2024-10-17T07:36:39.791943Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.076938264
+[2m2024-10-17T07:36:39.792128Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.079696566
+[2m2024-10-17T07:36:39.792278Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.08245487
+[2m2024-10-17T07:36:39.792407Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.08521317
+[2m2024-10-17T07:36:39.792525Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.08797147
+[2m2024-10-17T07:36:39.792675Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.09072977
+[2m2024-10-17T07:36:39.792797Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.093488075
+[2m2024-10-17T07:36:39.792945Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.09624638
+[2m2024-10-17T07:36:39.793108Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.09900467
+[2m2024-10-17T07:36:39.793261Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.10176297
+[2m2024-10-17T07:36:39.793406Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.104521275
+[2m2024-10-17T07:36:39.793568Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.10727958
+[2m2024-10-17T07:36:39.793726Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.11003788
+[2m2024-10-17T07:36:39.793895Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.11855859
+[2m2024-10-17T07:36:39.794091Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.12707931
+[2m2024-10-17T07:36:39.802396Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.12916867
+[2m2024-10-17T07:36:39.984031Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.1376894
+[2m2024-10-17T07:36:39.984153Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.1462101
+[2m2024-10-17T07:36:39.984210Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.15473081
+[2m2024-10-17T07:36:39.984278Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.16325153
+[2m2024-10-17T07:36:40.085717Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.17177224
+[2m2024-10-17T07:36:40.085923Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.18029295
+[2m2024-10-17T07:36:40.086093Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.18881367
+[2m2024-10-17T07:36:40.086261Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.19519061
+[2m2024-10-17T07:36:40.093049Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.20371132
+[2m2024-10-17T07:36:40.093243Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.21223202
+[2m2024-10-17T07:36:40.093318Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.22075275
+[2m2024-10-17T07:36:40.093386Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.22927345
+[2m2024-10-17T07:36:40.093525Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.23779416
+[2m2024-10-17T07:36:40.093870Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.24631488
+[2m2024-10-17T07:36:40.093998Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.25483558
+[2m2024-10-17T07:36:40.094193Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.26121253
+[2m2024-10-17T07:36:40.096453Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.26973325
+[2m2024-10-17T07:36:40.096792Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.27825394
+[2m2024-10-17T07:36:40.097052Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.28677467
+[2m2024-10-17T07:36:40.097148Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.2952954
+[2m2024-10-17T07:36:40.097297Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.30381608
+[2m2024-10-17T07:36:40.097439Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.3123368
+[2m2024-10-17T07:36:40.185791Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.32085752
+[2m2024-10-17T07:36:40.185905Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.32723445
+[2m2024-10-17T07:36:40.185956Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.33575517
+[2m2024-10-17T07:36:40.186039Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.34427586
+[2m2024-10-17T07:36:40.186191Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.35279658
+[2m2024-10-17T07:36:40.186328Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.3613173
+[2m2024-10-17T07:36:40.186472Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.369838
+[2m2024-10-17T07:36:40.186783Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.37835872
+[2m2024-10-17T07:36:40.186844Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.38687944
+[2m2024-10-17T07:36:40.186899Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.39325637
+[2m2024-10-17T07:36:40.186955Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.4017771
+[2m2024-10-17T07:36:40.291772Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.41029778
+[2m2024-10-17T07:36:40.291963Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.4188185
+[2m2024-10-17T07:36:40.292181Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.42733923
+[2m2024-10-17T07:36:40.292296Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.43585992
+[2m2024-10-17T07:36:40.296138Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.4523654
+[2m2024-10-17T07:36:40.296245Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.4592783
+[2m2024-10-17T07:36:40.296331Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.49228925
+[2m2024-10-17T07:36:40.296407Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.5253002
+[2m2024-10-17T07:36:40.296570Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.55831116
+[2m2024-10-17T07:36:40.301701Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.5913221
+[2m2024-10-17T07:36:40.303824Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.6243331
+[2m2024-10-17T07:36:40.305015Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.65734404
+[2m2024-10-17T07:36:40.306191Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.690355
+[2m2024-10-17T07:36:40.306304Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.72336596
+[2m2024-10-17T07:36:40.309347Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.7563769
+[2m2024-10-17T07:36:40.495737Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.7893879
+[2m2024-10-17T07:36:40.909219Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.82239884
+[2m2024-10-17T07:36:40.914031Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.8554098
+[2m2024-10-17T07:36:41.110346Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.88842076
+[2m2024-10-17T07:36:41.113308Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.9214317
+[2m2024-10-17T07:36:41.121472Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.9544427
+[2m2024-10-17T07:36:41.121614Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.98745364
+[2m2024-10-17T07:36:41.121816Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m put; add idle connection for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:36:41.121886Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m pooling idle connection for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:36:41.121891Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 1
+[2m2024-10-17T07:36:41.121991Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Download complete
+[2m2024-10-17T07:38:07.202893Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:38:07.203827Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:38:07.204343Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:38:07.204551Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:38:08.464152Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:38:08.464414Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:38:08.464722Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T07:38:08.464804Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T07:38:09.088708Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout waiting for idle connection: ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:38:09.088835Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m Http::connect; scheme=Some("https"), host=Some("cmdxd98sb0x3yprd.mangadex.network"), port=None
+[2m2024-10-17T07:38:09.089091Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::dns[0m[2m:[0m resolving host="cmdxd98sb0x3yprd.mangadex.network"
+[2m2024-10-17T07:38:09.089959Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to 172.67.185.252:443
+[2m2024-10-17T07:38:09.376004Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connected to 172.67.185.252:443
+[2m2024-10-17T07:38:09.415706Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::client[0m[2m:[0m http1 handshake complete, spawning background dispatcher task
+[2m2024-10-17T07:38:09.416003Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout dropped for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:38:09.894416Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.000010815359
+[2m2024-10-17T07:38:09.894754Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.001491438
+[2m2024-10-17T07:38:09.894937Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.0029720606
+[2m2024-10-17T07:38:09.895126Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.0044526835
+[2m2024-10-17T07:38:09.895364Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.005933306
+[2m2024-10-17T07:38:09.895539Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.007413929
+[2m2024-10-17T07:38:09.895700Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.008894552
+[2m2024-10-17T07:38:09.895843Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.010375174
+[2m2024-10-17T07:38:09.896051Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.011855797
+[2m2024-10-17T07:38:09.896225Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.013336419
+[2m2024-10-17T07:38:09.896395Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.014817042
+[2m2024-10-17T07:38:09.896567Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.016297664
+[2m2024-10-17T07:38:09.896745Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.017778287
+[2m2024-10-17T07:38:09.896933Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.01925891
+[2m2024-10-17T07:38:09.897143Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.020739533
+[2m2024-10-17T07:38:09.897403Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.022220155
+[2m2024-10-17T07:38:09.898045Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.023700777
+[2m2024-10-17T07:38:09.898507Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.025181402
+[2m2024-10-17T07:38:09.898605Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.026662024
+[2m2024-10-17T07:38:09.898720Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.028142646
+[2m2024-10-17T07:38:09.898801Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.029623268
+[2m2024-10-17T07:38:09.898870Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.03110389
+[2m2024-10-17T07:38:09.898939Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.032584514
+[2m2024-10-17T07:38:09.899014Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.033889927
+[2m2024-10-17T07:38:09.899080Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.03537055
+[2m2024-10-17T07:38:09.899148Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.03685117
+[2m2024-10-17T07:38:09.899249Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.038331795
+[2m2024-10-17T07:38:09.899286Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.03981242
+[2m2024-10-17T07:38:09.899359Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.04129304
+[2m2024-10-17T07:38:09.899457Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.042773664
+[2m2024-10-17T07:38:09.899564Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.044254288
+[2m2024-10-17T07:38:09.899631Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.04573491
+[2m2024-10-17T07:38:09.899713Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.047215533
+[2m2024-10-17T07:38:09.899759Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.048696153
+[2m2024-10-17T07:38:09.899826Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.050176777
+[2m2024-10-17T07:38:09.899901Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.0516574
+[2m2024-10-17T07:38:09.899964Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.05313802
+[2m2024-10-17T07:38:09.900054Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.054618645
+[2m2024-10-17T07:38:09.900121Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.05609927
+[2m2024-10-17T07:38:09.900185Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.05757989
+[2m2024-10-17T07:38:09.900257Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.059060514
+[2m2024-10-17T07:38:09.900344Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.06363433
+[2m2024-10-17T07:38:09.900420Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.06820814
+[2m2024-10-17T07:38:09.900503Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.069329694
+[2m2024-10-17T07:38:10.202103Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.07390351
+[2m2024-10-17T07:38:10.202287Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.07847733
+[2m2024-10-17T07:38:10.202479Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.083051145
+[2m2024-10-17T07:38:10.202598Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.08762496
+[2m2024-10-17T07:38:10.202716Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.092198774
+[2m2024-10-17T07:38:10.202851Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.09677259
+[2m2024-10-17T07:38:10.202924Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.1013464
+[2m2024-10-17T07:38:10.204662Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.10476947
+[2m2024-10-17T07:38:10.204855Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.10934328
+[2m2024-10-17T07:38:10.205028Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.1139171
+[2m2024-10-17T07:38:10.205112Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.11849091
+[2m2024-10-17T07:38:10.205266Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.12306473
+[2m2024-10-17T07:38:10.205409Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.12763855
+[2m2024-10-17T07:38:10.205557Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.13221236
+[2m2024-10-17T07:38:10.205714Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.13678618
+[2m2024-10-17T07:38:10.208145Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.14020923
+[2m2024-10-17T07:38:10.208615Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.14478305
+[2m2024-10-17T07:38:10.208767Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.14935687
+[2m2024-10-17T07:38:10.208880Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.15393068
+[2m2024-10-17T07:38:10.209210Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.1585045
+[2m2024-10-17T07:38:10.509377Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.16307831
+[2m2024-10-17T07:38:10.509540Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.16765213
+[2m2024-10-17T07:38:10.509763Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.17222594
+[2m2024-10-17T07:38:10.513504Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.175649
+[2m2024-10-17T07:38:10.514199Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.18022282
+[2m2024-10-17T07:38:10.515141Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.18479663
+[2m2024-10-17T07:38:10.515367Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.18937045
+[2m2024-10-17T07:38:10.515560Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.19394426
+[2m2024-10-17T07:38:10.515738Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.19851808
+[2m2024-10-17T07:38:10.515926Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.20309189
+[2m2024-10-17T07:38:10.516274Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.20766571
+[2m2024-10-17T07:38:10.517055Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.21108878
+[2m2024-10-17T07:38:10.517793Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.21566258
+[2m2024-10-17T07:38:10.517879Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.2202364
+[2m2024-10-17T07:38:10.518021Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.22481021
+[2m2024-10-17T07:38:10.518093Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.22938403
+[2m2024-10-17T07:38:10.518187Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.23395784
+[2m2024-10-17T07:38:10.518229Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.24281779
+[2m2024-10-17T07:38:10.518309Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.24652854
+[2m2024-10-17T07:38:10.518438Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.26424843
+[2m2024-10-17T07:38:10.525482Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.2819683
+[2m2024-10-17T07:38:10.525626Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.2996882
+[2m2024-10-17T07:38:10.525744Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.31740808
+[2m2024-10-17T07:38:10.527245Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.33512795
+[2m2024-10-17T07:38:10.527380Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.35284784
+[2m2024-10-17T07:38:10.577102Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.37056774
+[2m2024-10-17T07:38:10.577378Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.3882876
+[2m2024-10-17T07:38:10.591450Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.4060075
+[2m2024-10-17T07:38:10.592359Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.4237274
+[2m2024-10-17T07:38:10.592621Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.44144726
+[2m2024-10-17T07:38:10.592832Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.45916715
+[2m2024-10-17T07:38:10.593377Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.47688705
+[2m2024-10-17T07:38:10.593533Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.4946069
+[2m2024-10-17T07:38:10.593839Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.5123268
+[2m2024-10-17T07:38:10.594225Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.5300467
+[2m2024-10-17T07:38:10.598083Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.54776657
+[2m2024-10-17T07:38:10.607518Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.56548643
+[2m2024-10-17T07:38:10.607811Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.58320636
+[2m2024-10-17T07:38:10.623021Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.6009262
+[2m2024-10-17T07:38:10.623305Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.6186461
+[2m2024-10-17T07:38:10.625155Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.636366
+[2m2024-10-17T07:38:10.636270Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.6540859
+[2m2024-10-17T07:38:10.637953Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.67180574
+[2m2024-10-17T07:38:10.657814Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.68952566
+[2m2024-10-17T07:38:10.657984Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.7072455
+[2m2024-10-17T07:38:10.658147Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.7249654
+[2m2024-10-17T07:38:10.658308Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.7426853
+[2m2024-10-17T07:38:10.665971Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.7604052
+[2m2024-10-17T07:38:10.666220Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.77812505
+[2m2024-10-17T07:38:10.666451Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.795845
+[2m2024-10-17T07:38:10.666676Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.81356484
+[2m2024-10-17T07:38:10.669327Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.8312847
+[2m2024-10-17T07:38:10.914641Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.8490046
+[2m2024-10-17T07:38:10.914887Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.8667245
+[2m2024-10-17T07:38:10.915202Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.88444436
+[2m2024-10-17T07:38:10.915475Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.9021643
+[2m2024-10-17T07:38:10.915684Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.91988415
+[2m2024-10-17T07:38:11.109189Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.937604
+[2m2024-10-17T07:38:11.109333Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.95532393
+[2m2024-10-17T07:38:11.114786Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.9730438
+[2m2024-10-17T07:38:11.117744Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 0.99076366
+[2m2024-10-17T07:38:11.152646Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m put; add idle connection for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:38:11.152754Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//1 progress: 1
+[2m2024-10-17T07:38:11.152793Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m pooling idle connection for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:38:11.152859Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Download complete
+[2m2024-10-17T07:38:11.164452Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout waiting for idle connection: ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:38:11.164573Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m Http::connect; scheme=Some("https"), host=Some("cmdxd98sb0x3yprd.mangadex.network"), port=None
+[2m2024-10-17T07:38:11.164645Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::dns[0m[2m:[0m resolving host="cmdxd98sb0x3yprd.mangadex.network"
+[2m2024-10-17T07:38:11.166131Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to 172.67.185.252:443
+[2m2024-10-17T07:38:11.205523Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connected to 172.67.185.252:443
+[2m2024-10-17T07:38:11.253157Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::client[0m[2m:[0m http1 handshake complete, spawning background dispatcher task
+[2m2024-10-17T07:38:11.253465Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout dropped for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:38:11.558897Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.00019867015
+[2m2024-10-17T07:38:11.559233Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.008698028
+[2m2024-10-17T07:38:11.559465Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.017197385
+[2m2024-10-17T07:38:11.559660Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.025696743
+[2m2024-10-17T07:38:11.560095Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.0341961
+[2m2024-10-17T07:38:11.560394Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.04269546
+[2m2024-10-17T07:38:11.560749Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.051194813
+[2m2024-10-17T07:38:11.561319Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.05969417
+[2m2024-10-17T07:38:11.561571Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.06819353
+[2m2024-10-17T07:38:11.561682Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.07669289
+[2m2024-10-17T07:38:11.561832Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.08519224
+[2m2024-10-17T07:38:11.562010Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.0936916
+[2m2024-10-17T07:38:11.562161Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.10219096
+[2m2024-10-17T07:38:11.562333Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.11069032
+[2m2024-10-17T07:38:11.562487Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.11918967
+[2m2024-10-17T07:38:11.562628Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.12768903
+[2m2024-10-17T07:38:11.562760Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.13618839
+[2m2024-10-17T07:38:11.562872Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.14468774
+[2m2024-10-17T07:38:11.562972Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.15318711
+[2m2024-10-17T07:38:11.563118Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.16168647
+[2m2024-10-17T07:38:11.563229Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.17018582
+[2m2024-10-17T07:38:11.587819Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.17868517
+[2m2024-10-17T07:38:11.587947Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.18718453
+[2m2024-10-17T07:38:11.588123Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.19467813
+[2m2024-10-17T07:38:11.588224Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.20317748
+[2m2024-10-17T07:38:11.588366Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.21167684
+[2m2024-10-17T07:38:11.588494Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.22017619
+[2m2024-10-17T07:38:11.588578Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.22867556
+[2m2024-10-17T07:38:11.588666Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.23717491
+[2m2024-10-17T07:38:11.588809Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.24567427
+[2m2024-10-17T07:38:11.588939Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.25417364
+[2m2024-10-17T07:38:11.589027Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.262673
+[2m2024-10-17T07:38:11.589080Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.27117234
+[2m2024-10-17T07:38:11.589168Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.2796717
+[2m2024-10-17T07:38:11.589217Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.28221095
+[2m2024-10-17T07:38:11.589279Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.2907103
+[2m2024-10-17T07:38:11.589326Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.29920965
+[2m2024-10-17T07:38:11.589430Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.307709
+[2m2024-10-17T07:38:11.589541Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.3162084
+[2m2024-10-17T07:38:11.589640Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.32470775
+[2m2024-10-17T07:38:11.589745Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.3332071
+[2m2024-10-17T07:38:11.589849Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.3594626
+[2m2024-10-17T07:38:11.589961Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.3857181
+[2m2024-10-17T07:38:11.590095Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.4119736
+[2m2024-10-17T07:38:11.604406Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.4382291
+[2m2024-10-17T07:38:11.616210Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.4644846
+[2m2024-10-17T07:38:11.616407Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.4856492
+[2m2024-10-17T07:38:11.621123Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.5119047
+[2m2024-10-17T07:38:11.624090Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.5381602
+[2m2024-10-17T07:38:11.624283Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.5644157
+[2m2024-10-17T07:38:11.647532Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.5906712
+[2m2024-10-17T07:38:11.647756Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.61692667
+[2m2024-10-17T07:38:11.648048Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.6431822
+[2m2024-10-17T07:38:11.648257Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.6694377
+[2m2024-10-17T07:38:11.648420Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.68908745
+[2m2024-10-17T07:38:11.648539Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.71534294
+[2m2024-10-17T07:38:11.648733Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.7415984
+[2m2024-10-17T07:38:11.648852Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.7678539
+[2m2024-10-17T07:38:11.648964Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.7941094
+[2m2024-10-17T07:38:11.649142Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.82036495
+[2m2024-10-17T07:38:11.649261Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.84662044
+[2m2024-10-17T07:38:11.649362Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.8728759
+[2m2024-10-17T07:38:11.650274Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.8925257
+[2m2024-10-17T07:38:11.650897Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.91878116
+[2m2024-10-17T07:38:11.651460Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.94503665
+[2m2024-10-17T07:38:11.651774Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.97129214
+[2m2024-10-17T07:38:11.651967Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 0.9975477
+[2m2024-10-17T07:38:11.652037Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#1 - Committee Meeting!//2 progress: 1
+[2m2024-10-17T07:38:11.652065Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Download complete
+[2m2024-10-17T07:38:11.652083Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m put; add idle connection for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T07:38:11.652181Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m pooling idle connection for ("https", cmdxd98sb0x3yprd.mangadex.network)

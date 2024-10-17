@@ -1,18 +1,11 @@
-use dto::carriers::Request;
-use dto::{Chapter, ChapterList, ChapterPages, Manga, MangaList};
+use dto::carriers::Response;
+use dto::{Chapter, ChapterList, Filter, Manga, MangaList};
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
 use crate::source::Source;
 
 pub type ActionTx = UnboundedSender<Action>;
 pub type ActionRx = UnboundedReceiver<Action>;
-
-#[derive(Clone)]
-pub enum Page {
-    Sources,
-    Mangas,
-    MangaDetails,
-}
 
 #[derive(Clone)]
 pub enum Action {
@@ -22,17 +15,50 @@ pub enum Action {
     PrevPage,
     Quit,
     FetchSources,
-    Process(AsyncItem),
+    RunCommand(Command),
+    DownloadChapter(String),
     SetActiveSource(Source),
     SetActiveManga(Manga),
     SetActiveChapter(Chapter),
-    SendRequest(Request),
+    DisplayMangaList(MangaList),
+    DisplayChapterList(ChapterList),
+    DisplaySourceList(Vec<Source>),
+    InvokeError(String),
+}
+
+#[derive(Clone)]
+pub enum Command {
+    SearchManga {
+        keyword: String,
+        page: u32,
+        filter: Filter,
+    },
+    FetchChapterList {
+        identifier: String,
+        page: u32,
+        filter: Filter,
+    },
+    FetchMangaDetail {
+        identifier: String,
+    },
+    FetchChapterDetail {
+        identifier: String,
+    },
+}
+
+#[derive(Clone)]
+pub enum Page {
+    Sources,
+    Mangas,
+    MangaDetails,
 }
 
 #[derive(Clone)]
 pub enum AsyncItem {
-    Mangas(MangaList),
-    Chapters(ChapterList),
-    Pages(ChapterPages),
+    Ok,
+    MangaList(Response<MangaList>),
+    ChapterList(Response<ChapterList>),
+    Manga(Response<Manga>),
+    Chapter(Response<Chapter>),
     Sources(Vec<Source>),
 }

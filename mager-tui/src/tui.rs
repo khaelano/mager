@@ -1,22 +1,15 @@
-use std::{
-    io::{stdout, Stdout},
-    time::Duration,
-};
+use std::io::{stdout, Stdout};
+use std::time::Duration;
 
-use color_eyre::{self, eyre::Result};
-use crossterm::{
-    self,
-    event::{Event as CrosstermEvent, EventStream, KeyEvent},
-    terminal::{EnterAlternateScreen, LeaveAlternateScreen},
-};
+use color_eyre::eyre::Result;
+use crossterm::event::{Event as CrosstermEvent, EventStream, KeyEvent};
+use crossterm::terminal::{EnterAlternateScreen, LeaveAlternateScreen};
 use futures::{FutureExt, StreamExt};
 use ratatui::{backend::CrosstermBackend, Terminal};
-use tokio::{
-    self,
-    sync::mpsc::{self, UnboundedReceiver, UnboundedSender},
-    task::JoinHandle,
-    time::interval,
-};
+use tokio::sync::mpsc;
+use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
+use tokio::task::JoinHandle;
+use tokio::time::interval;
 use tokio_util::{self, sync::CancellationToken};
 
 #[derive(Clone)]
@@ -24,7 +17,6 @@ pub enum Event {
     Tick,
     Render,
     Init,
-    Quit,
     Error,
     Key(KeyEvent),
 }
@@ -57,6 +49,8 @@ impl Tui {
         crossterm::terminal::enable_raw_mode()?;
         crossterm::execute!(stdout(), EnterAlternateScreen)?;
 
+        Self::set_panic_hook();
+
         self.start();
         Ok(())
     }
@@ -64,10 +58,23 @@ impl Tui {
     pub(crate) fn exit(&mut self) -> Result<()> {
         self.stop()?;
         if crossterm::terminal::is_raw_mode_enabled()? {
-            crossterm::terminal::disable_raw_mode()?;
-            crossterm::execute!(stdout(), LeaveAlternateScreen)?;
+            Self::restore_term()?;
         }
 
+        Ok(())
+    }
+
+    fn set_panic_hook() {
+        let hook = std::panic::take_hook();
+        std::panic::set_hook(Box::new(move |panic_info| {
+            let _ = Self::restore_term(); // ignore any errors as we are already failing
+            hook(panic_info);
+        }));
+    }
+
+    pub(crate) fn restore_term() -> Result<()> {
+        crossterm::terminal::disable_raw_mode()?;
+        crossterm::execute!(stdout(), LeaveAlternateScreen)?;
         Ok(())
     }
 
@@ -82,7 +89,7 @@ impl Tui {
             self.frame_rate,
         );
 
-        self.task = tokio::spawn(async { event_loop.await });
+        self.task = tokio::spawn(event_loop);
     }
 
     pub(crate) fn stop(&mut self) -> Result<()> {

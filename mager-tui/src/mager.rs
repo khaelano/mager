@@ -1,22 +1,23 @@
-use std::path::PathBuf;
-use std::{env, process::Child};
+use std::env;
 
 use color_eyre::eyre::eyre;
 use color_eyre::Result;
-use crossterm::style::Print;
-use dto::carriers::{Command, Response};
-use dto::{carriers::Request, Filter, MangaList};
-use dto::{Chapter, ChapterList, ChapterPages};
-use reqwest::{self, ClientBuilder};
-use serde_json::Value;
+use dto::carriers::{Command, Response, Status};
+use dto::{carriers::Request, MangaList};
+
 use tokio::fs;
-use tokio::sync::mpsc::UnboundedSender;
+use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
+use tracing::instrument;
 
-use crate::actions::{Action, AsyncItem};
+use crate::actions::Action;
 use crate::source::Source;
-use crate::utils::{connect_to_source, download_resource, read_from_stream, write_to_stream};
+use crate::utils::*;
 
-pub(crate) async fn list_local_sources() -> Result<Vec<Source>> {
+use dto::*;
+
+/// Function to list sources that are available in the local machine.
+/// By default, the path is located in $HOME/.local/mager/sources/
+pub async fn list_local_sources() -> Result<Vec<Source>> {
     let mut sources: Vec<Source> = Vec::new();
 
     let home = env::var("HOME")?;
@@ -41,124 +42,174 @@ pub(crate) async fn list_local_sources() -> Result<Vec<Source>> {
     Ok(sources)
 }
 
-pub(crate) async fn list_repo_sources() -> Result<Vec<Source>> {
-    let mut sources: Vec<Source> = Vec::new();
-    let client = ClientBuilder::new().user_agent("mager").build()?;
-
-    let response = client
-        .get("https://api.github.com/repos/khaelano/mager/contents/release/sources")
-        .send()
-        .await?
-        .bytes()
-        .await?;
-
-    let parsed_response: Value = serde_json::from_slice(&response)?;
-
-    for source in parsed_response.as_array().unwrap() {
-        sources.push(Source {
-            name: source.get("name").unwrap().as_str().unwrap().to_string(),
-            url: Some(
-                source
-                    .get("download_url")
-                    .unwrap()
-                    .as_str()
-                    .unwrap()
-                    .to_string(),
-            ),
-            is_local: false,
-            process: None,
-        });
-    }
-
-    Ok(sources)
+/// Function to list sources that can be downloaded from the online repository.
+/// WARNING: This function is not finished! (i still don't know how to properly implements it)
+pub async fn list_repo_sources() -> Result<Vec<Source>> {
+    todo!();
 }
 
-pub(crate) async fn send_request(
-    action_tx: UnboundedSender<Action>,
-    request: Request,
-) -> Result<()> {
-    let port = 7878;
+/// Fetch all available sources, either local sources, or the one in the online repository.
+/// WARNING: This function is not finished! Use with caution
+pub async fn fetch_sources(action_tx: UnboundedSender<Action>) -> Result<()> {
+    let local_sources = list_local_sources().await?;
+
+    action_tx.send(Action::DisplaySourceList(local_sources))?;
+    Ok(())
+}
+
+/// Connects to port and verify source. If the current listener responds back, verification
+/// is successful.
+pub fn ping_source(port: u16) -> Result<()> {
+    let request = Request {
+        command: Command::Ping,
+        version: String::from("0.0.0"),
+    };
     let request_string = serde_json::to_string(&request)?;
 
     let mut connection = connect_to_source(port)?;
     write_to_stream(&request_string, &mut connection)?;
-    let response_bytes = read_from_stream(&mut connection)?;
+    let raw_response = read_from_stream(&mut connection)?;
+    let response: Response<()> = serde_json::from_slice(&raw_response)?;
 
-    match request.command {
-        Command::Ping => {}
-        Command::Search {
-            keyword: _,
-            page: _,
-            filter: _,
-        } => {
-            let response: Response<MangaList> = serde_json::from_slice(&response_bytes)?;
-            action_tx.send(Action::Process(AsyncItem::Mangas(response.content)))?;
-        }
-        Command::Chapters {
-            identifier: _,
-            page: _,
-            filter: _,
-        } => {
-            let response: Response<ChapterList> = serde_json::from_slice(&response_bytes)?;
-            action_tx.send(Action::Process(AsyncItem::Chapters(response.content)))?;
-        }
-        Command::Pages { identifier: _ } => {
-            let response: Response<ChapterPages> = serde_json::from_slice(&response_bytes)?;
-            action_tx.send(Action::Process(AsyncItem::Pages(response.content)))?;
-        }
+    match response.status {
+        Status::Ok => Ok(()),
+        Status::Error => Err(eyre!("Error verifying source.")),
     }
-    Ok(())
 }
 
-pub(crate) async fn fetch_sources(action_tx: UnboundedSender<Action>) -> Result<()> {
-    let local_sources = list_local_sources().await?;
-
-    action_tx.send(Action::Process(AsyncItem::Sources(local_sources)))?;
-    Ok(())
-}
-
-fn download_chapter(port: u16, manga_title: &str, chapter: &Chapter) {
-    let home = env::var("HOME").unwrap();
+/// Sends manga search request to active source and return its response. Please take note
+/// that all error from the server are not handled by this function.
+pub async fn search_manga(
+    port: u16,
+    search_keyword: &str,
+    page: u32,
+    filter: &Filter,
+) -> Result<Response<MangaList>> {
     let request = Request {
-        command: Command::Pages {
-            identifier: chapter.identifier.clone(),
+        command: Command::Search {
+            keyword: search_keyword.to_string(),
+            page,
+            filter: filter.clone(),
+        },
+        version: String::from("0.0.0"),
+    };
+    let req_string = serde_json::to_string(&request)?;
+
+    // Connect to source and validates it
+    let Ok(()) = ping_source(port) else {
+        return Err(eyre!("Error verifying source"));
+    };
+
+    let mut connection = connect_to_source(port)?;
+    write_to_stream(&req_string, &mut connection)?;
+    let raw_response = read_from_stream(&mut connection)?;
+    let response: Response<MangaList> = serde_json::from_slice(&raw_response)?;
+
+    Ok(response)
+}
+
+/// Sends chapter list request for a specified manga to active ource and return its response.
+/// Please take note that all error from the server are not handled by this function.
+pub async fn fetch_chapters(
+    port: u16,
+    manga_identifier: &str,
+    page: u32,
+    filter: &Filter,
+) -> Result<Response<ChapterList>> {
+    let request = Request {
+        command: Command::FetchChapterList {
+            identifier: manga_identifier.to_string(),
+            page,
+            filter: filter.clone(),
+        },
+        version: String::from("0.0.0"),
+    };
+    let req_string = serde_json::to_string(&request)?;
+
+    // Connect to source and validates it
+    let Ok(()) = ping_source(port) else {
+        return Err(eyre!("Error verifying source"));
+    };
+
+    let mut connection = connect_to_source(port)?;
+    write_to_stream(&req_string, &mut connection)?;
+    let raw_response = read_from_stream(&mut connection)?;
+    let response: Response<ChapterList> = serde_json::from_slice(&raw_response)?;
+
+    Ok(response)
+}
+
+/// Sends a manga details request for a specified manga to active source and return its
+/// response. Please take note that all error from the server are not handled by this function.
+pub async fn fetch_manga(port: u16, manga_identifier: &str) -> Result<Response<Manga>> {
+    let request = Request {
+        command: Command::FetchManga {
+            manga_identifier: manga_identifier.to_string(),
         },
         version: String::from("0.0.0"),
     };
 
-    let mut connection = connect_to_source(port).unwrap();
-    write_to_stream(&serde_json::to_string(&request).unwrap(), &mut connection).unwrap();
+    let req_string = serde_json::to_string(&request)?;
 
-    let response: Response<ChapterPages> =
-        serde_json::from_slice(&read_from_stream(&mut connection).unwrap()).unwrap();
-
-    let base_folder = format!("{home}/Downloads/mager/{}", response.source_name);
-
-    let rt = tokio::runtime::Builder::new_multi_thread()
-        .enable_all()
-        .build()
-        .unwrap();
-
-    let mut handles = Vec::new();
-    let mut counter = 1;
-    for url in response.content {
-        let mut path = PathBuf::from(base_folder.clone());
-        path.push(format!(
-            "{manga_title}/{} - {}/{counter}.png",
-            chapter.number, chapter.title
-        ));
-
-        let handle = rt.spawn(download_resource(url.clone(), path.clone()));
-
-        handles.push(handle);
-        counter += 1;
+    // Connect to source and validates it
+    if ping_source(port).is_err() {
+        return Err(eyre!("Error verifying source"));
     }
 
-    for h in handles {
-        rt.block_on(h).unwrap().unwrap();
+    let mut connection = connect_to_source(port)?;
+    write_to_stream(&req_string, &mut connection)?;
+    let raw_response = read_from_stream(&mut connection)?;
+    let response: Response<Manga> = serde_json::from_slice(&raw_response)?;
+
+    Ok(response)
+}
+
+/// Sends a chapter details request for a specified manga to active source and return its
+/// response. Please take note that all error from the server are not handled by this function.
+pub async fn fetch_chapter(port: u16, chapter_identifier: &str) -> Result<Response<Chapter>> {
+    let request = Request {
+        command: Command::FetchChapter {
+            chapter_identifier: chapter_identifier.to_string(),
+        },
+        version: String::from("0.0.0"),
+    };
+
+    let req_string = serde_json::to_string(&request)?;
+
+    // Connect to source and validates it
+    if ping_source(port).is_err() {
+        return Err(eyre!("Error verifying source"));
     }
 
-    println!("Download successful")
+    let mut connection = connect_to_source(port)?;
+    write_to_stream(&req_string, &mut connection)?;
+    let raw_response = read_from_stream(&mut connection)?;
+    let response: Response<Chapter> = serde_json::from_slice(&raw_response)?;
+
+    Ok(response)
+}
+
+#[instrument]
+pub async fn download_chapter(port: u16, chapter_id: &str) -> Result<Vec<UnboundedReceiver<f32>>> {
+    let home = env::var("HOME")?;
+
+    let ch_response = fetch_chapter(port, &chapter_id).await?;
+    let chapter = ch_response.content.unwrap();
+
+    let mng_response = fetch_manga(port, &chapter.manga_identifier).await?;
+    let manga = mng_response.content.unwrap();
+
+    let base_folder = format!(
+        "{home}/Downloads/mager/{}/#{} - {}/",
+        manga.title, chapter.number, chapter.title
+    );
+
+    let mut progress_rxs: Vec<UnboundedReceiver<f32>> = Vec::new();
+    for (i, url) in chapter.page_urls.iter().enumerate() {
+        progress_rxs
+            .push(download_resource(url.to_string(), format!("{}/{}", base_folder, i + 1)).await?);
+    }
+    Ok(progress_rxs)
 }
 
 #[cfg(test)]

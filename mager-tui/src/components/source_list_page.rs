@@ -1,5 +1,5 @@
 use color_eyre::Result;
-use crossterm::event::{KeyCode, KeyEvent, KeyEventKind};
+use crossterm::event::{KeyCode, KeyEventKind};
 use ratatui::prelude::*;
 use ratatui::widgets::{Block, List, ListDirection, ListItem, ListState, Padding};
 
@@ -7,7 +7,68 @@ use crate::actions::{Action, ActionTx, AsyncItem, Page};
 use crate::source::Source;
 use crate::tui::Event;
 
+use super::search_bar::SearchBarComponent;
 use super::Component;
+
+pub struct SourcesPage {
+    search_bar: SearchBarComponent,
+    source_list: SourceListComp,
+    action_tx: ActionTx,
+}
+
+impl SourcesPage {
+    pub(crate) fn new(action_tx: ActionTx) -> Self {
+        action_tx.send(Action::FetchSources).unwrap();
+
+        Self {
+            search_bar: SearchBarComponent::new(),
+            source_list: SourceListComp::new(action_tx.clone()),
+            action_tx,
+        }
+    }
+}
+
+impl Component for SourcesPage {
+    fn handle_events(&mut self, event: Event) -> Result<()> {
+        let Event::Key(k_event) = event.clone() else {
+            return Ok(());
+        };
+
+        let KeyEventKind::Press = k_event.kind else {
+            return Ok(());
+        };
+
+        match k_event.code {
+            KeyCode::Char('q') => self.action_tx.send(Action::Quit)?,
+            KeyCode::Enter => {
+                // let keyword = self.search_bar.get_contents();
+            }
+            _ => {}
+        }
+
+        self.source_list.handle_events(event)?;
+
+        Ok(())
+    }
+
+    fn update(&mut self, action: Action) -> Result<()> {
+        self.source_list.update(action)?;
+
+        Ok(())
+    }
+
+    fn draw(&mut self, frame: &mut Frame, area: Rect) -> Result<()> {
+        let layout = Layout::default()
+            .direction(Direction::Vertical)
+            .constraints([Constraint::Length(3), Constraint::Fill(10)])
+            .split(area);
+
+        self.search_bar.draw(frame, layout[0])?;
+        self.source_list.draw(frame, layout[1])?;
+
+        Ok(())
+    }
+}
 
 pub struct SourceListComp {
     action_tx: ActionTx,
@@ -23,13 +84,19 @@ impl SourceListComp {
             source_list: Vec::new(),
         }
     }
+}
 
-    fn handle_key_events(&mut self, key_event: KeyEvent) -> Result<()> {
-        let KeyEventKind::Press = key_event.kind else {
+impl Component for SourceListComp {
+    fn handle_events(&mut self, event: Event) -> Result<()> {
+        let Event::Key(k_event) = event else {
             return Ok(());
         };
 
-        match key_event.code {
+        let KeyEventKind::Press = k_event.kind else {
+            return Ok(());
+        };
+
+        match k_event.code {
             KeyCode::Up => self.list_state.select_previous(),
             KeyCode::Down => self.list_state.select_next(),
             KeyCode::Enter => {
@@ -45,26 +112,10 @@ impl SourceListComp {
 
         Ok(())
     }
-}
-
-impl Component for SourceListComp {
-    fn handle_events(&mut self, event: Event) -> Result<()> {
-        match event {
-            Event::Key(k) => self.handle_key_events(k)?,
-            _ => {}
-        }
-        Ok(())
-    }
 
     fn update(&mut self, action: Action) -> Result<()> {
-        match action {
-            Action::Process(i) => match i {
-                AsyncItem::Sources(s) => {
-                    self.source_list = s;
-                }
-                _ => {}
-            },
-            _ => {}
+        if let Action::DisplaySourceList(s_list) = action {
+            self.source_list = s_list
         }
 
         Ok(())

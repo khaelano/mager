@@ -1,0 +1,160 @@
+[2m2024-10-17T04:13:38.909350Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:13:38.910028Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:13:38.910692Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:13:38.910915Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:30.153065Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:30.153629Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:30.154282Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:30.154507Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:35.318860Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:35.319251Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:35.319718Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:35.319921Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:36.680255Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:36.680591Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:36.681050Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:36.681269Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:38.906251Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:38.906628Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:38.907104Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:38.907337Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:40.339496Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:40.339783Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:40.340268Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:25:40.340504Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:25:44.452639Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout waiting for idle connection: ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T04:25:44.452804Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m Http::connect; scheme=Some("https"), host=Some("cmdxd98sb0x3yprd.mangadex.network"), port=None
+[2m2024-10-17T04:25:44.453112Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::dns[0m[2m:[0m resolving host="cmdxd98sb0x3yprd.mangadex.network"
+[2m2024-10-17T04:25:44.952245Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to 172.67.185.252:443
+[2m2024-10-17T04:25:45.249236Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connected to 172.67.185.252:443
+[2m2024-10-17T04:25:45.462149Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::client[0m[2m:[0m http1 handshake complete, spawning background dispatcher task
+[2m2024-10-17T04:25:45.462335Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout dropped for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T04:25:46.263727Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.000056415214
+[2m2024-10-17T04:25:46.264052Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.0028147164
+[2m2024-10-17T04:25:46.264230Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.0055730175
+[2m2024-10-17T04:25:46.264383Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.008331318
+[2m2024-10-17T04:25:46.264536Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.011089619
+[2m2024-10-17T04:25:46.264703Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.013847921
+[2m2024-10-17T04:25:46.264902Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.016606221
+[2m2024-10-17T04:25:46.265075Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.019364523
+[2m2024-10-17T04:25:46.265229Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.022122825
+[2m2024-10-17T04:30:41.818792Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:41.819345Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:41.819960Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:41.820184Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:49.734444Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:49.734788Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:49.735299Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:49.735503Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:52.794344Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:52.794699Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:52.795145Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:52.795348Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:56.491829Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:56.492169Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:56.492562Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:56.492746Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:58.613744Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:58.614036Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:30:58.614450Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:30:58.614676Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:31:00.769847Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout waiting for idle connection: ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T04:31:00.770331Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m Http::connect; scheme=Some("https"), host=Some("cmdxd98sb0x3yprd.mangadex.network"), port=None
+[2m2024-10-17T04:31:00.770813Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::dns[0m[2m:[0m resolving host="cmdxd98sb0x3yprd.mangadex.network"
+[2m2024-10-17T04:31:00.959511Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to 172.67.185.252:443
+[2m2024-10-17T04:31:01.169324Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connected to 172.67.185.252:443
+[2m2024-10-17T04:31:01.264138Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::client[0m[2m:[0m http1 handshake complete, spawning background dispatcher task
+[2m2024-10-17T04:31:01.264452Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout dropped for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T04:31:01.680811Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.000056415214
+[2m2024-10-17T04:31:01.686245Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.0028147164
+[2m2024-10-17T04:31:01.686469Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.0055730175
+[2m2024-10-17T04:31:01.686640Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.008331318
+[2m2024-10-17T04:31:01.686814Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.011089619
+[2m2024-10-17T04:31:01.687388Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.013847921
+[2m2024-10-17T04:31:01.687717Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.016606221
+[2m2024-10-17T04:31:01.687863Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.019364523
+[2m2024-10-17T04:31:01.688025Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.022122825
+[2m2024-10-17T04:41:16.103284Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:16.103626Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:16.104183Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:16.104388Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:22.339696Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:22.340061Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:22.340541Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:22.340752Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:23.362252Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:23.362621Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:23.363100Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:23.363338Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:26.375800Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:26.376388Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:26.376822Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:26.377069Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:30.824728Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:30.825025Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:30.825495Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:41:30.825762Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:41:32.704635Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout waiting for idle connection: ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T04:41:32.704885Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m Http::connect; scheme=Some("https"), host=Some("cmdxd98sb0x3yprd.mangadex.network"), port=None
+[2m2024-10-17T04:41:32.705196Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::dns[0m[2m:[0m resolving host="cmdxd98sb0x3yprd.mangadex.network"
+[2m2024-10-17T04:41:33.587145Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to 104.21.0.110:443
+[2m2024-10-17T04:41:33.888228Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to [2606:4700:3036::ac43:b9fc]:443
+[2m2024-10-17T04:41:33.888444Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connect error for [2606:4700:3036::ac43:b9fc]:443: ConnectError("tcp connect error", Os { code: 101, kind: NetworkUnreachable, message: "Network is unreachable" })
+[2m2024-10-17T04:41:33.888534Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to [2606:4700:3032::6815:6e]:443
+[2m2024-10-17T04:41:33.888616Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connect error for [2606:4700:3032::6815:6e]:443: ConnectError("tcp connect error", Os { code: 101, kind: NetworkUnreachable, message: "Network is unreachable" })
+[2m2024-10-17T04:41:35.115718Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connected to 104.21.0.110:443
+[2m2024-10-17T04:41:35.329801Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::client[0m[2m:[0m http1 handshake complete, spawning background dispatcher task
+[2m2024-10-17T04:41:35.330097Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout dropped for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T04:41:35.646925Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.000048355898
+[2m2024-10-17T04:41:35.647246Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.002806657
+[2m2024-10-17T04:41:35.647424Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.0055649583
+[2m2024-10-17T04:41:35.647568Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.00832326
+[2m2024-10-17T04:41:35.647720Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.0110815605
+[2m2024-10-17T04:41:35.647891Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.013839861
+[2m2024-10-17T04:41:35.648058Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.016598163
+[2m2024-10-17T04:41:35.648210Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.019356463
+[2m2024-10-17T04:41:35.648366Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#10 - Advertiser 68//1 progress: 0.022114765
+[2m2024-10-17T04:51:20.225586Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:51:20.225965Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:51:20.226609Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:51:20.226828Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:51:39.437785Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:51:39.438249Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:51:39.438865Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:51:39.439150Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:51:56.630245Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:51:56.630578Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:51:56.631029Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:51:56.631277Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:52:03.294453Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:52:03.294780Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:52:03.295253Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:52:03.295538Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:52:14.589205Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:52:14.589561Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:52:14.590223Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:52:14.590524Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:52:19.333805Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:52:19.334096Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:52:19.334503Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connecting to port 7878
+[2m2024-10-17T04:52:19.334750Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Connection to port 7878 established!
+[2m2024-10-17T04:52:26.171874Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout waiting for idle connection: ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T04:52:26.172054Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m Http::connect; scheme=Some("https"), host=Some("cmdxd98sb0x3yprd.mangadex.network"), port=None
+[2m2024-10-17T04:52:26.172783Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::dns[0m[2m:[0m resolving host="cmdxd98sb0x3yprd.mangadex.network"
+[2m2024-10-17T04:52:26.408229Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to 172.67.185.252:443
+[2m2024-10-17T04:52:26.710313Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to [2606:4700:3036::ac43:b9fc]:443
+[2m2024-10-17T04:52:26.710529Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connect error for [2606:4700:3036::ac43:b9fc]:443: ConnectError("tcp connect error", Os { code: 101, kind: NetworkUnreachable, message: "Network is unreachable" })
+[2m2024-10-17T04:52:26.710585Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connecting to [2606:4700:3032::6815:6e]:443
+[2m2024-10-17T04:52:26.710659Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connect error for [2606:4700:3032::6815:6e]:443: ConnectError("tcp connect error", Os { code: 101, kind: NetworkUnreachable, message: "Network is unreachable" })
+[2m2024-10-17T04:52:27.417462Z[0m [34mDEBUG[0m [2mhyper_util::client::legacy::connect::http[0m[2m:[0m connected to 172.67.185.252:443
+[2m2024-10-17T04:52:29.466288Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::client[0m[2m:[0m http1 handshake complete, spawning background dispatcher task
+[2m2024-10-17T04:52:29.466619Z[0m [35mTRACE[0m [2mhyper_util::client::legacy::pool[0m[2m:[0m checkout dropped for ("https", cmdxd98sb0x3yprd.mangadex.network)
+[2m2024-10-17T04:52:30.181360Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.00002881043
+[2m2024-10-17T04:52:30.181694Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.0017436573
+[2m2024-10-17T04:52:30.181872Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.003458504
+[2m2024-10-17T04:52:30.182057Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.005173351
+[2m2024-10-17T04:52:30.182226Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.006888198
+[2m2024-10-17T04:52:30.182393Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.008603045
+[2m2024-10-17T04:52:30.182616Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.010317892
+[2m2024-10-17T04:52:30.183909Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.012032739
+[2m2024-10-17T04:52:30.184121Z[0m [32m INFO[0m [2mmager_tui::utils[0m[2m:[0m Downloading file to /home/khaelano/Downloads/mager/Blue Archive! (Japan)/#6 - Cat Tree//1 progress: 0.013747586

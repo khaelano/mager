@@ -42,21 +42,12 @@ pub mod carriers {
         pub version: String,
     }
 
-    impl Request {
-        pub fn next_page(&self) -> Option<Request> {
-            self.command.next_page().map(|c| Request {
-                command: c,
-                version: self.version.clone(),
-            })
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     pub struct Response<T> {
         pub status: Status,
         pub reason: String,
         pub source_name: String,
-        pub content: T,
+        pub content: Option<T>,
     }
 
     #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -68,44 +59,20 @@ pub mod carriers {
             page: u32,
             filter: Filter,
         },
-        Chapters {
+        FetchChapterList {
             identifier: String,
             page: u32,
             filter: Filter,
         },
-        Pages {
-            identifier: String,
+        FetchManga {
+            manga_identifier: String,
+        },
+        FetchChapter {
+            chapter_identifier: String,
         },
     }
 
-    impl Command {
-        fn next_page(&self) -> Option<Command> {
-            match self.clone() {
-                Command::Ping => None,
-                Command::Search {
-                    keyword,
-                    page,
-                    filter,
-                } => Some(Command::Search {
-                    keyword,
-                    page: page + 1,
-                    filter,
-                }),
-                Command::Chapters {
-                    identifier,
-                    page,
-                    filter,
-                } => Some(Command::Chapters {
-                    identifier,
-                    page: page + 1,
-                    filter,
-                }),
-                Command::Pages { identifier: _ } => None,
-            }
-        }
-    }
-
-    #[derive(Serialize, Deserialize, Debug)]
+    #[derive(Serialize, Deserialize, Debug, Clone)]
     pub enum Status {
         Ok,
         Error,
@@ -116,6 +83,15 @@ pub mod carriers {
 pub struct Filter {
     pub language: String,
     pub sort: Order,
+}
+
+impl Default for Filter {
+    fn default() -> Self {
+        Self {
+            language: String::from("en"),
+            sort: Order::Descending,
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -139,11 +115,19 @@ pub struct Author {
     pub details: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct MangaList {
     pub page: u32,
     pub total_page: u32,
-    pub data: Vec<Manga>,
+    pub data: Vec<MangaListEntry>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct MangaListEntry {
+    pub identifier: String,
+    pub title: String,
+    pub status: PublicationStatus,
+    // pub cover_art_url: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -160,11 +144,18 @@ pub struct Manga {
     pub status: PublicationStatus,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct ChapterList {
     pub page: u32,
     pub total_page: u32,
-    pub data: Vec<Chapter>,
+    pub data: Vec<ChapterListEntry>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct ChapterListEntry {
+    pub identifier: String,
+    pub title: String,
+    pub number: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -173,9 +164,9 @@ pub struct Chapter {
     // Either way it doesn't matter because it doesn't affect the
     // client in any way. But i suggest to use hash code if available
     pub identifier: String,
+    pub manga_identifier: String,
     pub title: String,
     pub number: String,
     pub language: String,
+    pub page_urls: Vec<String>,
 }
-
-pub type ChapterPages = Vec<String>;

@@ -5,7 +5,7 @@ use std::process;
 
 use crate::utils::{connect_to_source, download_resource, read_from_stream, write_to_stream};
 use dto::carriers::{Command, Request, Response, Status};
-use dto::{Chapter, ChapterList, ChapterPages, Filter, Manga, MangaList, Order};
+use dto::{Chapter, ChapterList, Filter, Manga, MangaList, Order};
 
 use crate::MangaOperation;
 use termion::{self, terminal_size};
@@ -188,7 +188,7 @@ fn browse_chapters(port: u16, manga: &Manga, mut page: u32) {
         };
 
         let request = Request {
-            command: Command::Chapters {
+            command: Command::FetchChapterList {
                 identifier: manga.identifier.clone(),
                 page,
                 filter,
